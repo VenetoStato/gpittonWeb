@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://gpitton-web.vercel.app/sitemap.xml
+
+# Disallow API endpoints (opzionale, per sicurezza)
+Disallow: /api/get-contacts
+Disallow: /api/send-bulk-newsletter

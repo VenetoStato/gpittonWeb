@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outreach - Crea Mail di Presentazione | Giovanni Pitton</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="images/Logo.png">
+    <style>
+        .outreach-page { padding: 120px 0 60px; }
+        .outreach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        @media (max-width: 900px) { .outreach-grid { grid-template-columns: 1fr; } }
+        .outreach-card { background: #fff; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; }
+        .outreach-card h2 { font-size: 1.25rem; margin-bottom: 1rem; color: var(--primary-color); }
+        .outreach-card label { display: block; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem; }
+        .outreach-card input, .outreach-card textarea { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit; margin-bottom: 1rem; }
+        .outreach-card textarea { min-height: 200px; resize: vertical; }
+        .outreach-card textarea.html-editor { min-height: 300px; font-family: monospace; font-size: 0.85rem; }
+        .btn-outreach { background: var(--gradient-blue); color: #fff; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 600; margin-right: 0.5rem; margin-top: 0.5rem; }
+        .btn-outreach:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-outreach.secondary { background: #e2e8f0; color: #2d3748; }
+        .preview-frame { border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem; min-height: 300px; background: #f8fafc; overflow: auto; }
+        .company-list { max-height: 400px; overflow-y: auto; }
+        .company-item { padding: 0.75rem; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        .company-item:hover { background: #f7fafc; }
+        .company-item .name { font-weight: 500; }
+        .company-item .email { font-size: 0.85rem; color: var(--primary-color); }
+        .company-item .city { font-size: 0.8rem; color: #718096; }
+        .copy-email { font-size: 0.75rem; padding: 0.25rem 0.5rem; cursor: pointer; }
+        .tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+        .tab { padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; background: #e2e8f0; }
+        .tab.active { background: var(--primary-color); color: #fff; }
+        .alert-info { background: #ebf8ff; border: 1px solid #90cdf4; color: #2b6cb0; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo-link"><img src="images/Logo.png" alt="Logo" class="logo-img"></a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contatti</a></li>
+                <li><a href="outreach.html" class="nav-link" style="font-weight:600;">Outreach</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="outreach-page">
+        <div class="container">
+            <h1 style="margin-bottom: 0.5rem;">Crea Mail di Presentazione</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Componi l'email e usa la lista di aziende target (Venezia, Treviso, Pordenone).</p>
+
+            <div class="alert-info">
+                <strong>Come usare:</strong> 1) Compila oggetto e messaggio. 2) Clicca "Anteprima" per vedere. 3) <strong>Invia test</strong> per ricevere l'email su giovanni.pitton2@gmail.com. 4) Esporta la lista o copia per invio bulk. <br><strong>Email verificate:</strong> tutte le email nella lista sono state estratte dalle pagine contatti ufficiali delle aziende.
+            </div>
+
+            <div class="outreach-grid">
+                <div class="outreach-card">
+                    <h2><i class="fas fa-envelope"></i> Composizione Email</h2>
+                    <label>Oggetto</label>
+                    <input type="text" id="emailSubject" placeholder="Es: Consulenza Robotica e AI - Proposta per [Azienda]" value="Consulenza Robotica e AI - Proposta per la vostra azienda">
+                    <label>Messaggio (HTML)</label>
+                    <div class="tabs">
+                        <span class="tab active" data-tab="simple">Semplice</span>
+                        <span class="tab" data-tab="html">HTML</span>
+                    </div>
+                    <textarea id="emailBody" class="simple-editor">Buongiorno,
+
+Sono Giovanni Pitton, Ingegnere Gestionale con oltre 13 anni di esperienza in robotica e automazione industriale.
+
+Offro servizi di consulenza per:
+• Analisi industrializzazione e identificazione tecnologie adatte
+• Robot umanoidi Unitree (G1, H2) e quadrupedi
+• Cobot Universal Robots e AMR MiR
+• Sviluppo POC e integrazione con hub di esperti
+
+Ho collaborato con 100+ aziende, università e politecnici italiani.
+
+Sarei lieto di una breve call (15 min) per capire se posso supportare i vostri progetti di automazione.
+
+Sito: gpitton.com
+LinkedIn: linkedin.com/in/giovannipitton
+
+Cordiali saluti,
+Giovanni Pitton</textarea>
+                    <textarea id="emailBodyHtml" class="html-editor" style="display:none;"></textarea>
+                    <button class="btn-outreach" id="btnPreview"><i class="fas fa-eye"></i> Anteprima</button>
+                    <button class="btn-outreach" id="btnSendTest" title="Invia email di test a giovanni.pitton2@gmail.com"><i class="fas fa-paper-plane"></i> Invia test</button>
+                    <button class="btn-outreach secondary" id="btnReset"><i class="fas fa-undo"></i> Reset</button>
+                </div>
+
+                <div class="outreach-card">
+                    <h2><i class="fas fa-desktop"></i> Anteprima</h2>
+                    <div class="preview-frame" id="previewFrame">
+                        <p style="color:#718096;">Clicca "Anteprima" per vedere l'email.</p>
+                    </div>
+                    <h2 style="margin-top: 1.5rem;"><i class="fas fa-building"></i> Aziende Target (Venezia, Treviso, Pordenone)</h2>
+                    <button class="btn-outreach secondary" id="btnExportCsv"><i class="fas fa-download"></i> Esporta CSV</button>
+                    <button class="btn-outreach secondary" id="btnCopyEmails"><i class="fas fa-copy"></i> Copia email</button>
+                    <button class="btn-outreach secondary" id="btnCopyHtml" title="Copia HTML per invio bulk API"><i class="fas fa-code"></i> Copia HTML</button>
+                    <div class="company-list" id="companyList"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Email VERIFICATE da pagine contatti ufficiali (scraping 2025)
+        const COMPANIES = [
+            { name: "Carretta", email: "info@carretta.it", city: "Quinto di Treviso (TV)", sector: "Robotica, meccatronica", verified: true },
+            { name: "EvoTech", email: "info@evotech.it", city: "Moriago della Battaglia (TV)", sector: "Automazione robotica", verified: true },
+            { name: "Pellizzari", email: "info@pellizzari.tv", city: "Castello di Godego (TV)", sector: "Automazione industriale", verified: true },
+            { name: "Gontec", email: "info@gontec.it", city: "Lonigo (VI)", sector: "Saldatura robotizzata, Yaskawa", verified: true },
+            { name: "Automazione Veneto", email: "commerciale@automazioneveneto.com", city: "Camponogara (VE)", sector: "Automazione", verified: true },
+            { name: "Mollificio Pagnin", email: "info@pagnin.it", city: "Caselle di Selvazzano (PD)", sector: "Manifatturiero", verified: true },
+            { name: "Cartindustria Veneta", email: "info@venetacart.com", city: "Quinto Vicentino (VI)", sector: "Carta", verified: true }
+        ];
+
+        const DEFAULT_HTML = `<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><style>body{font-family:Arial,sans-serif;line-height:1.6;color:#333;max-width:600px;margin:0 auto;padding:20px;} a{color:#0052cc;} .signature{margin-top:20px;}</style></head>
+<body>
+<p>Buongiorno,</p>
+<p>Sono <strong>Giovanni Pitton</strong>, Ingegnere Gestionale con oltre 13 anni di esperienza in robotica e automazione industriale.</p>
+<p>Offro servizi di consulenza per:</p>
+<ul>
+<li>Analisi industrializzazione e identificazione tecnologie adatte</li>
+<li>Robot umanoidi Unitree (G1, H2) e quadrupedi</li>
+<li>Cobot Universal Robots e AMR MiR</li>
+<li>Sviluppo POC e integrazione con hub di esperti</li>
+</ul>
+<p>Ho collaborato con 100+ aziende, università e politecnici italiani.</p>
+<p>Sarei lieto di una breve call (15 min) per capire se posso supportare i vostri progetti di automazione.</p>
+<p><a href="https://gpitton.com">gpitton.com</a> | <a href="https://linkedin.com/in/giovannipitton">LinkedIn</a></p>
+<p class="signature">Cordiali saluti,<br><strong>Giovanni Pitton</strong></p>
+</body>
+</html>`;
+
+        function renderCompanyList() {
+            const list = document.getElementById('companyList');
+            list.innerHTML = COMPANIES.map(c => `
+                <div class="company-item">
+                    <div>
+                        <span class="name">${c.name}</span>
+                        <span class="city"> — ${c.city}</span>
+                        <div class="email">${c.email}</div>
+                    </div>
+                    <button class="copy-email btn-outreach secondary" data-email="${c.email}">Copia</button>
+                </div>
+            `).join('');
+            list.querySelectorAll('[data-email]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    navigator.clipboard.writeText(btn.dataset.email);
+                    btn.textContent = 'Copiato!';
+                    setTimeout(() => btn.textContent = 'Copia', 1500);
+                });
+            });
+        }
+
+        function simpleToHtml(text) {
+            const lines = text.split('\n');
+            let html = '', inList = false;
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                const isBullet = /^[•\-]\s*/.test(line) || /^\d+\.\s/.test(line);
+                if (isBullet) {
+                    if (!inList) { html += '<ul>'; inList = true; }
+                    html += '<li>' + line.replace(/^[•\-]\s*|^\d+\.\s*/, '').trim() + '</li>';
+                } else {
+                    if (inList) { html += '</ul>'; inList = false; }
+                    if (line.trim() === '') html += '<br>';
+                    else html += '<p>' + line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/linkedin\.com/g, '<a href="https://linkedin.com/in/giovannipitton">linkedin.com</a>').replace(/gpitton\.com/g, '<a href="https://gpitton.com">gpitton.com</a>') + '</p>';
+                }
+            }
+            if (inList) html += '</ul>';
+            return html;
+        }
+
+        function getHtmlForBulk() {
+            const tab = document.querySelector('.tab.active').dataset.tab;
+            if (tab === 'simple') {
+                const body = '<div style="font-family:Arial,sans-serif;line-height:1.6;color:#333;max-width:600px;margin:0 auto;padding:20px;">' + simpleToHtml(document.getElementById('emailBody').value) + '</div>';
+                return '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>' + body + '</body></html>';
+            }
+            return document.getElementById('emailBodyHtml').value || DEFAULT_HTML;
+        }
+
+        function updatePreview() {
+            const tab = document.querySelector('.tab.active').dataset.tab;
+            const subject = document.getElementById('emailSubject').value;
+            let html = '';
+            if (tab === 'simple') {
+                html = '<div style="font-family:Arial,sans-serif;line-height:1.6;color:#333;max-width:600px;padding:20px;">' + simpleToHtml(document.getElementById('emailBody').value) + '</div>';
+            } else {
+                html = document.getElementById('emailBodyHtml').value || DEFAULT_HTML;
+            }
+            document.getElementById('previewFrame').innerHTML = html;
+        }
+
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                const isSimple = tab.dataset.tab === 'simple';
+                document.getElementById('emailBody').style.display = isSimple ? 'block' : 'none';
+                document.getElementById('emailBodyHtml').style.display = isSimple ? 'none' : 'block';
+                if (!isSimple && !document.getElementById('emailBodyHtml').value) {
+                    document.getElementById('emailBodyHtml').value = DEFAULT_HTML;
+                }
+                updatePreview();
+            });
+        });
+
+        document.getElementById('btnPreview').addEventListener('click', updatePreview);
+
+        document.getElementById('btnSendTest').addEventListener('click', async () => {
+            const btn = document.getElementById('btnSendTest');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Invio...';
+            try {
+                const subject = document.getElementById('emailSubject').value;
+                const tab = document.querySelector('.tab.active').dataset.tab;
+                let textMsg = '';
+                if (tab === 'simple') {
+                    textMsg = document.getElementById('emailBody').value;
+                } else {
+                    const html = document.getElementById('emailBodyHtml').value || DEFAULT_HTML;
+                    textMsg = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+                }
+                const res = await fetch(window.location.origin + '/api/send-contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: 'Test Outreach',
+                        email: 'test@gpitton.com',
+                        company: 'Test',
+                        subject: '[TEST] ' + subject,
+                        message: textMsg
+                    })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    btn.innerHTML = '<i class="fas fa-check"></i> Inviato!';
+                    setTimeout(() => { btn.innerHTML = '<i class="fas fa-paper-plane"></i> Invia test'; btn.disabled = false; }, 3000);
+                } else {
+                    btn.innerHTML = '<i class="fas fa-times"></i> Errore';
+                    alert(data.message || 'Errore invio');
+                    btn.disabled = false;
+                }
+            } catch (e) {
+                btn.innerHTML = '<i class="fas fa-times"></i> Errore';
+                alert('Errore: ' + e.message);
+                btn.disabled = false;
+            }
+        });
+
+        document.getElementById('btnReset').addEventListener('click', () => {
+            document.getElementById('emailSubject').value = 'Consulenza Robotica e AI - Proposta per la vostra azienda';
+            document.getElementById('emailBody').value = `Buongiorno,
+
+Sono Giovanni Pitton, Ingegnere Gestionale con oltre 13 anni di esperienza in robotica e automazione industriale.
+
+Offro servizi di consulenza per:
+• Analisi industrializzazione e identificazione tecnologie adatte
+• Robot umanoidi Unitree (G1, H2) e quadrupedi
+• Cobot Universal Robots e AMR MiR
+• Sviluppo POC e integrazione con hub di esperti
+
+Ho collaborato con 100+ aziende, università e politecnici italiani.
+
+Sarei lieto di una breve call (15 min) per capire se posso supportare i vostri progetti di automazione.
+
+Sito: gpitton.com
+LinkedIn: linkedin.com/in/giovannipitton
+
+Cordiali saluti,
+Giovanni Pitton`;
+            document.getElementById('emailBodyHtml').value = '';
+            updatePreview();
+        });
+
+        document.getElementById('btnExportCsv').addEventListener('click', () => {
+            const csv = 'Nome;Email;Città;Settore\n' + COMPANIES.map(c => `"${c.name}";"${c.email}";"${c.city}";"${c.sector}"`).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'aziende-target-veneto.csv';
+            a.click();
+            URL.revokeObjectURL(a.href);
+        });
+
+        document.getElementById('btnCopyEmails').addEventListener('click', () => {
+            const emails = COMPANIES.map(c => c.email).join(', ');
+            navigator.clipboard.writeText(emails);
+            document.getElementById('btnCopyEmails').innerHTML = '<i class="fas fa-check"></i> Copiato!';
+            setTimeout(() => { document.getElementById('btnCopyEmails').innerHTML = '<i class="fas fa-copy"></i> Copia email'; }, 2000);
+        });
+
+        document.getElementById('btnCopyHtml').addEventListener('click', () => {
+            navigator.clipboard.writeText(getHtmlForBulk());
+            document.getElementById('btnCopyHtml').innerHTML = '<i class="fas fa-check"></i> HTML copiato!';
+            setTimeout(() => { document.getElementById('btnCopyHtml').innerHTML = '<i class="fas fa-code"></i> Copia HTML'; }, 2000);
+        });
+
+        renderCompanyList();
+        updatePreview();
+    </script>
+</body>
+</html>

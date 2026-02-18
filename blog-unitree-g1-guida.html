@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guida completa Unitree G1: specifiche tecniche, configurazioni, controllo remoto, quick start. Tutto quello che serve per programmare il robot umanoide Unitree G1.">
+    <meta name="keywords" content="Unitree G1, robot umanoide, guida operativa, specifiche tecniche, controllo remoto, programmazione robotica">
+    <title>Unitree G1: Guida Operativa Completa | Blog Robotica - Giovanni Pitton</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="images/Logo.png">
+    <link rel="canonical" href="https://gpitton-web.vercel.app/blog-unitree-g1-guida.html">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Unitree G1: Guida Operativa Completa",
+      "author": {
+        "@type": "Person",
+        "name": "Giovanni Pitton"
+      },
+      "datePublished": "2025-01-29",
+      "description": "Guida completa sul funzionamento e programmazione del robot umanoide Unitree G1",
+      "publisher": {
+        "@type": "Person",
+        "name": "Giovanni Pitton"
+      }
+    }
+    </script>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html" class="logo-link">
+                    <img src="images/Logo.png" alt="Giovanni Pitton Logo" class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contatti</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <article style="max-width: 900px; margin: 0 auto; padding: 100px 20px 40px;">
+        <div style="margin-bottom: 2rem;">
+            <a href="blog.html" style="color: var(--primary-color); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                <i class="fas fa-arrow-left"></i> Torna al Blog
+            </a>
+            <div style="display: flex; gap: 1rem; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                <span><i class="fas fa-calendar"></i> 29 gen 2025</span>
+                <span><i class="fas fa-clock"></i> 13 min</span>
+                <span><i class="fas fa-tag"></i> Unitree</span>
+            </div>
+            <h1 style="font-size: 2.5rem; margin-bottom: 1rem; line-height: 1.2;">Unitree G1: Guida Operativa Completa</h1>
+            <p style="font-size: 1.1rem; color: var(--text-secondary); line-height: 1.7;">
+                Panoramica completa sul funzionamento e programmazione a 360° del robot umanoide <strong>Unitree G1</strong>, 
+                l'ultimo prodotto di casa Unitree che punta a rivoluzionare l'automazione.
+            </p>
+        </div>
+
+        <div style="background: #f7fafc; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
+            <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Modelli Disponibili</h2>
+            <ul style="line-height: 2;">
+                <li><strong>G1-EDU Standard:</strong> 23 Gradi di Libertà, privo di manipolatori</li>
+                <li><strong>G1-EDU Advanced:</strong> 29 Gradi di Libertà, privo di manipolatori</li>
+                <li><strong>G1-EDU Ultimate A:</strong> 29 DoF + mani Dex3-1 a 3 dita senza sensori</li>
+                <li><strong>G1-EDU Ultimate B:</strong> 29 DoF + mani Dex3-1 a 3 dita con sensori</li>
+                <li><strong>G1-EDU Ultimate C:</strong> 29 DoF + mani a 5 dita con sensori</li>
+            </ul>
+        </div>
+
+        <div style="line-height: 1.8; color: var(--text-primary);">
+            <h2 style="font-size: 2rem; margin: 2rem 0 1rem;">Specifiche Tecniche</h2>
+            <p>Il robot G1 è diviso in due sezioni principali: parte superiore e inferiore del corpo.</p>
+            <ul style="margin: 1rem 0; padding-left: 2rem;">
+                <li><strong>Braccio singolo:</strong> 5 gradi di libertà (spalla, parte superiore del braccio, gomito)</li>
+                <li><strong>Gamba singola:</strong> 6 gradi di libertà (anca, gamba, ginocchio, caviglia)</li>
+                <li><strong>Vita:</strong> 1 grado di libertà (articolazione lombare)</li>
+            </ul>
+
+            <h2 style="font-size: 2rem; margin: 2rem 0 1rem;">Guida All'Utilizzo</h2>
+            <h3 style="font-size: 1.5rem; margin: 1.5rem 0 0.75rem;">Quick Start</h3>
+            <p>Procedure di avvio consigliate:</p>
+            <ol style="margin: 1rem 0; padding-left: 2rem;">
+                <li><strong>Avvio regolare:</strong> Boot → Damping Mode → Lock Stand → Main Operation Control → Demo → Seated Mode → Spegnimento</li>
+                <li><strong>Avvio da sdraiato:</strong> Boot (corpo piatto) → Damping Mode → Lying and Standing → Demo → Squat Switch → Spegnimento</li>
+                <li><strong>Avvio accovacciato:</strong> Boot (Squat Mode) → Damping Mode → Squat Switch → Demo → Spegnimento</li>
+            </ol>
+
+            <h3 style="font-size: 1.5rem; margin: 1.5rem 0 0.75rem;">Controllo Remoto</h3>
+            <p>Il G1 può essere controllato tramite controller remoto con funzioni avanzate per movimento, calibrazione e debug.</p>
+
+            <h2 style="font-size: 2rem; margin: 2rem 0 1rem;">Interfacce di Comunicazione</h2>
+            <p>Il robot supporta diverse interfacce per la comunicazione e il controllo:</p>
+            <ul style="margin: 1rem 0; padding-left: 2rem;">
+                <li>Ethernet per comunicazione ad alta velocità</li>
+                <li>WiFi per controllo wireless</li>
+                <li>USB per configurazione e debug</li>
+                <li>SDK Unitree per programmazione avanzata</li>
+            </ul>
+
+            <h2 style="font-size: 2rem; margin: 2rem 0 1rem;">Sistemi Radar e Depth Camera</h2>
+            <p>Il G1 è equipaggiato con sistemi avanzati di percezione:</p>
+            <ul style="margin: 1rem 0; padding-left: 2rem;">
+                <li>LiDAR per mappatura e navigazione</li>
+                <li>Depth Camera per rilevamento oggetti</li>
+                <li>Sensori di visione per riconoscimento</li>
+            </ul>
+        </div>
+
+        <div style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 2rem; border-radius: 10px; margin: 3rem 0; text-align: center;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Hai Domande sul Unitree G1?</h3>
+            <p style="margin-bottom: 1.5rem;">Richiedi una consulenza personalizzata per il tuo progetto</p>
+            <a href="index.html#contact" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i> Contattami
+            </a>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Giovanni Pitton</h4>
+                    <p>Robotics and AI Full Stack Developer | Technical Sales</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Link</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="index.html#contact">Contatti</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Giovanni Pitton. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

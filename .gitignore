@@ -1,0 +1,25 @@
+# EmailJS config (contains sensitive keys)
+emailjs-config.js
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Environment files with secrets
+.env
+.env.local
+.env.*.local
+
+# File rimossi per Mailgun compliance - non riaggiungere
+DEPLOY_ORA.md
+GUIDA_VERCEL_PASSO_PASSO.md

@@ -1,0 +1,30 @@
+{
+  "name": "giovanni-pitton-website",
+  "version": "1.0.0",
+  "description": "Sito web personale di Giovanni Pitton - Robotics and AI Full Stack Developer",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server . -p 8080 -o",
+    "deploy": "git add . && git commit -m 'Update website' && git push origin main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VenetoStato/giovannipitton.git"
+  },
+  "keywords": [
+    "robotics",
+    "AI",
+    "full-stack",
+    "developer",
+    "portfolio",
+    "giovanni-pitton"
+  ],
+  "author": "Giovanni Pitton",
+  "license": "MIT",
+  "homepage": "https://venetostato.github.io/giovannipitton/",
+  "dependencies": {
+    "mailgun.js": "^9.4.1",
+    "form-data": "^4.0.0"
+  },
+  "devDependencies": {}
+}

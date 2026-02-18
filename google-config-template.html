@@ -1,0 +1,68 @@
+<!-- 
+COPIA E INCOLLA QUESTO CODICE IN index.html
+SOSTITUISCI I VALORI CON I TUOI ID
+-->
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX', {
+    'anonymize_ip': true,
+    'page_title': document.title,
+    'page_location': window.location.href
+  });
+  
+  // Google Ads Conversion Tracking
+  gtag('config', 'AW-XXXXXXXXXX');
+  
+  // Eventi personalizzati
+  // Traccia invio form contatti
+  document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function() {
+        gtag('event', 'form_submit', {
+          'event_category': 'Contact',
+          'event_label': 'Contact Form',
+          'value': 1
+        });
+        // Conversion Google Ads
+        gtag('event', 'conversion', {
+          'send_to': 'AW-XXXXXXXXXX/CONVERSION_LABEL',
+          'value': 1.0,
+          'currency': 'EUR'
+        });
+      });
+    }
+    
+    // Traccia iscrizione newsletter
+    const newsletterForm = document.getElementById('newsletterForm');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', function() {
+        gtag('event', 'newsletter_signup', {
+          'event_category': 'Newsletter',
+          'event_label': 'Newsletter Subscription',
+          'value': 1
+        });
+      });
+    }
+    
+    // Traccia click CTA
+    document.querySelectorAll('a[href="#contact"]').forEach(link => {
+      link.addEventListener('click', function() {
+        gtag('event', 'cta_click', {
+          'event_category': 'CTA',
+          'event_label': 'Contact CTA',
+          'value': 1
+        });
+      });
+    });
+  });
+</script>
+
+<!-- Google Search Console Verification -->
+<!-- SOSTITUISCI CON IL TUO CODICE DI VERIFICA -->
+<meta name="google-site-verification" content="CODICE_VERIFICA_QUI" />

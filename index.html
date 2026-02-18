@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Giovanni Pitton - Ingegnere Gestionale | Consulente Robotica e AI | Servizi Freelance. Analisi industrializzazione, robot umanoidi Unitree G1, cobot Universal Robots, AMR MiR. 13+ anni esperienza. Collaborazioni con università italiane e politecnici. Apparizioni TV italiane.">
+    <meta name="keywords" content="Giovanni Pitton, consulente robotica Italia, robotica umanoide, Unitree G1, Universal Robots cobot, MiR AMR, automazione industriale, robot collaborativi, analisi industrializzazione, ingegnere gestionale, robotica Veneto, consulenza automazione, AI robotica, integrazione robotica, proof of concept robotica, sviluppo robotica, PhD robotica, università robotica, San Donà di Piave, consulente robotica freelance">
+    <meta name="author" content="Giovanni Pitton">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="language" content="Italian">
+    <meta name="geo.region" content="IT-34">
+    <meta name="geo.placename" content="San Donà di Piave, Veneto">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gpitton-web.vercel.app/">
+    <meta property="og:title" content="Giovanni Pitton - Consulente Robotica e AI | Servizi Freelance | Unitree, Universal Robots, MiR">
+    <meta property="og:description" content="Ingegnere Gestionale con 13+ anni di esperienza. Consulenza robotica umanoide Unitree, cobot Universal Robots, AMR MiR. Analisi industrializzazione e integrazione robotica avanzata.">
+    <meta property="og:image" content="https://gpitton-web.vercel.app/images/Logo.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="it_IT">
+    <meta property="og:site_name" content="Giovanni Pitton - Consulente Robotica">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://gpitton-web.vercel.app/">
+    <meta name="twitter:title" content="Giovanni Pitton - Consulente Robotica e AI | Servizi Freelance">
+    <meta name="twitter:description" content="Ingegnere Gestionale con 13+ anni esperienza. Consulenza robotica umanoide Unitree, cobot Universal Robots, AMR MiR.">
+    <meta name="twitter:image" content="https://gpitton-web.vercel.app/images/Logo.png">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Giovanni Pitton",
+      "jobTitle": "Ingegnere Gestionale | Robotics and AI Full Stack Developer | Consulente Freelance",
+      "offers": {
+        "@type": "Service",
+        "serviceType": "Consulenza Robotica e Automazione Industriale",
+        "areaServed": "IT",
+        "availableChannel": {
+          "@type": "ServiceChannel",
+          "serviceUrl": "https://www.linkedin.com/in/giovannipitton/"
+        }
+      },
+      "url": "https://www.linkedin.com/in/giovannipitton/",
+      "sameAs": [
+        "https://www.linkedin.com/in/giovannipitton/"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "San Donà di Piave",
+        "addressRegion": "Veneto",
+        "addressCountry": "IT"
+      }
+    }
+    </script>
+    
+    <!-- Additional Structured Data for Services -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Giovanni Pitton - Consulenza Robotica",
+      "description": "Consulenza specializzata in robotica umanoide, cobot, AMR e automazione industriale. Analisi industrializzazione, integrazione Unitree, Universal Robots, MiR.",
+      "provider": {
+        "@type": "Person",
+        "name": "Giovanni Pitton",
+        "jobTitle": "Ingegnere Gestionale | Consulente Robotica"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Italia"
+      },
+      "serviceType": [
+        "Consulenza Robotica Umanoide",
+        "Analisi Industrializzazione",
+        "Integrazione Cobot",
+        "Sviluppo Soluzioni AMR",
+        "Proof of Concept Robotica"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servizi Robotica",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Analisi Industrializzazione",
+              "description": "Analisi aziende con potenzialità di industrializzazione, identificazione tecnologie adatte"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Integrazione Robotica Umanoide Unitree",
+              "description": "Consulenza e integrazione robot umanoidi Unitree G1 per applicazioni innovative"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Cobot Universal Robots",
+              "description": "Soluzioni con Universal Robots e AI Accelerator per automazione collaborativa"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AMR MiR",
+              "description": "Progettazione e integrazione MiR AMR per ecosistemi di automazione flessibili"
+            }
+          }
+        ]
+      }
+    }
+    </script>
+    
+    <!-- Google tag (gtag.js) - Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74QGKBDN17"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      // Set default consent mode (GDPR compliant)
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied'
+      });
+      
+      gtag('config', 'G-74QGKBDN17', {
+        'anonymize_ip': true,
+        'page_title': document.title,
+        'page_location': window.location.href
+      });
+      
+      // Update consent if user has already accepted
+      if (localStorage.getItem('cookieConsent') === 'accepted') {
+        gtag('consent', 'update', {
+          'analytics_storage': 'granted'
+        });
+      }
+      
+      // Google Ads Conversion Tracking (da configurare quando avrai il Conversion ID)
+      // gtag('config', 'AW-XXXXXXXXXX');
+      
+      // Traccia eventi form e conversioni
+      document.addEventListener('DOMContentLoaded', function() {
+        // Traccia invio form contatti
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+          contactForm.addEventListener('submit', function() {
+            gtag('event', 'form_submit', {
+              'event_category': 'Contact',
+              'event_label': 'Contact Form',
+              'value': 1
+            });
+            // Conversion Google Ads (attiva quando avrai il Conversion ID)
+            // gtag('event', 'conversion', {
+            //   'send_to': 'AW-XXXXXXXXXX/CONVERSION_LABEL',
+            //   'value': 1.0,
+            //   'currency': 'EUR'
+            // });
+          });
+        }
+        
+        // Traccia iscrizione newsletter
+        const newsletterForm = document.getElementById('newsletterForm');
+        if (newsletterForm) {
+          newsletterForm.addEventListener('submit', function() {
+            gtag('event', 'newsletter_signup', {
+              'event_category': 'Newsletter',
+              'event_label': 'Newsletter Subscription',
+              'value': 1
+            });
+          });
+        }
+        
+        // Traccia click su CTA principali
+        document.querySelectorAll('a[href="#contact"]').forEach(function(link) {
+          link.addEventListener('click', function() {
+            gtag('event', 'cta_click', {
+              'event_category': 'CTA',
+              'event_label': 'Contact CTA Click',
+              'value': 1
+            });
+          });
+        });
+        
+        // Traccia click su link LinkedIn
+        document.querySelectorAll('a[href*="linkedin.com"]').forEach(function(link) {
+          link.addEventListener('click', function() {
+            gtag('event', 'external_link', {
+              'event_category': 'Social',
+              'event_label': 'LinkedIn Click',
+              'value': 1
+            });
+          });
+        });
+      });
+    </script>
+    
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="7Sq5ggdAp4K1pu5q9FUc-28Ia4bbp5tr7MjVcQ9nYWM" />
+    
+    <title>Giovanni Pitton - Consulente Robotica e AI | Servizi Freelance | Unitree, Universal Robots, MiR</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/Logo.png">
+    <link rel="apple-touch-icon" href="images/Logo.png">
+    <link rel="shortcut icon" href="images/Logo.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://gpitton-web.vercel.app/">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="#home" class="logo-link">
+                    <img src="images/Logo.png" alt="Giovanni Pitton Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <span class="logo-text" style="display:none;">GP</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">Chi Sono</a></li>
+                <li><a href="#services" class="nav-link">Servizi</a></li>
+                <li><a href="#experience" class="nav-link">Esperienza</a></li>
+                <li><a href="#skills" class="nav-link">Competenze</a></li>
+                <li><a href="#projects" class="nav-link">Progetti</a></li>
+                <li><a href="#partners" class="nav-link">Collaborazioni</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="outreach.html" class="nav-link">Outreach</a></li>
+                <li><a href="#contact" class="nav-link">Contatti</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Giovanni Pitton</span>
+                </h1>
+                <h2 class="hero-subtitle">Ingegnere Gestionale | Robotics and AI Full Stack Developer | Technical Sales</h2>
+                <p class="hero-description">
+                    Appassionato di robotica e di tutto ciò che abbia un circuito. 
+                    Specializzato in soluzioni robotiche avanzate, AI e automazione industriale.
+                    Collaboro con le più importanti università italiane e politecnici.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Richiedi Consulenza Gratuita
+                    </a>
+                    <a href="https://www.linkedin.com/in/giovannipitton/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="#services" class="btn btn-secondary">
+                        <i class="fas fa-robot"></i> I Miei Servizi
+                    </a>
+                </div>
+                <div class="hero-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>San Donà di Piave, Veneto, Italia</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <a href="#about"><i class="fas fa-chevron-down"></i></a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Chi Sono</h2>
+            <div class="about-content">
+                <div class="about-main">
+                    <div class="about-image">
+                        <img src="images/Presentation.png" alt="Giovanni Pitton - Ingegnere Gestionale e Consulente Robotica e AI con 13+ anni esperienza" onerror="this.style.display='none'">
+                    </div>
+                    <div class="about-text">
+                    <p>
+                        <strong>Ingegnere Gestionale</strong> e <strong>Robotics and AI Full Stack Developer</strong> con 13+ anni di esperienza. 
+                        Specializzato in <strong>consulenza automazione</strong> con focus su <strong>robotica umanoide</strong> e <strong>collaborativa</strong> 
+                        (cobot e AMR). Lead R&D su filone <strong>Unitree</strong> (umanoidi G1/H2, quadrupedi Go2/A2/B2).
+                    </p>
+                    <p>
+                        Offro <strong>servizi freelance</strong> per: consulenza automazione, sviluppo POC, supporto programmazione piattaforme umanoidi, 
+                        preventivi e progettazione proposte automazione (umanoide, quadrupede, collaborativa).
+                    </p>
+                    <p>
+                        Ho collaborato con <strong>100+ aziende</strong> su progetti IT e robotica, università italiane e politecnici. 
+                        Interventi su TV italiane. Hub collaboratori: PhD, professori, aziende robotiche 20+ anni.
+                    </p>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Aziende con cui ho Collaborato</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">13+</div>
+                        <div class="stat-label">Anni di Esperienza</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">553+</div>
+                        <div class="stat-label">Follower LinkedIn</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Servizi</h2>
+            <p class="section-subtitle" style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem; color: var(--text-secondary);">
+                Consulenza automazione con focus su robotica umanoide e collaborativa (cobot e AMR)
+            </p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Consulenza Automazione</h3>
+                    <p>
+                        <strong>Consulenza specializzata</strong> per automazione industriale con focus su 
+                        <strong>robotica umanoide</strong> (Unitree G1, H2) e <strong>robotica collaborativa</strong> 
+                        (cobot Universal Robots, AMR MiR). Analisi processi e identificazione soluzioni ottimali.
+                    </p>
+                    <ul style="text-align: left; margin: 1rem 0; padding-left: 1.5rem;">
+                        <li>Analisi processi produttivi</li>
+                        <li>Valutazione tecnologie robotiche</li>
+                        <li>Roadmap automazione personalizzata</li>
+                    </ul>
+                    <a href="#contact" class="service-cta">Richiedi Consulenza Gratuita <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Supporto Programmazione Umanoidi</h3>
+                    <p>
+                        <strong>Supporto tecnico</strong> per programmazione piattaforme umanoidi <strong>Unitree</strong> 
+                        (G1, H2) e quadrupedi (Go2, A2, B2). Programmazione low-level, integrazione e personalizzazione.
+                    </p>
+                    <ul style="text-align: left; margin: 1rem 0; padding-left: 1.5rem;">
+                        <li>Programmazione low-level Unitree</li>
+                        <li>Integrazione applicazioni custom</li>
+                        <li>Supporto sviluppo e debugging</li>
+                    </ul>
+                    <a href="#contact" class="service-cta">Richiedi Supporto Tecnico <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>Sviluppo POC</h3>
+                    <p>
+                        <strong>Sviluppo Proof-of-Concept</strong> per validare soluzioni robotiche prima dell'implementazione. 
+                        POC per umanoidi, cobot e AMR con simulazioni avanzate (MuJoCo, NVIDIA Isaac Sim, Gazebo).
+                    </p>
+                    <ul style="text-align: left; margin: 1rem 0; padding-left: 1.5rem;">
+                        <li>POC robotica umanoide</li>
+                        <li>POC cobot e AMR</li>
+                        <li>Simulazioni digital twin</li>
+                    </ul>
+                    <a href="#contact" class="service-cta">Parla del Tuo POC <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3>Preventivi e Progettazione</h3>
+                    <p>
+                        <strong>Preventivi dettagliati</strong> e <strong>progettazione proposte</strong> per automazione 
+                        umanoide, quadrupede e collaborativa. Analisi costi, ROI e timeline implementazione.
+                    </p>
+                    <ul style="text-align: left; margin: 1rem 0; padding-left: 1.5rem;">
+                        <li>Preventivi personalizzati</li>
+                        <li>Progettazione soluzioni complete</li>
+                        <li>Analisi ROI e timeline</li>
+                    </ul>
+                    <a href="#contact" class="service-cta">Richiedi Preventivo Gratuito <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Robot Collaborativi (Cobot)</h3>
+                    <p>
+                        Consulenza e integrazione <strong>Universal Robots</strong> con AI Accelerator. 
+                        Automazione collaborativa sicura per processi produttivi.
+                    </p>
+                    <ul style="text-align: left; margin: 1rem 0; padding-left: 1.5rem;">
+                        <li>Universal Robots cobot</li>
+                        <li>AI Accelerator integration</li>
+                        <li>Ottimizzazione processi</li>
+                    </ul>
+                    <a href="#contact" class="service-cta">Richiedi Demo Cobot <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>AMR - Mobile Robots</h3>
+                    <p>
+                        Progettazione e integrazione <strong>MiR AMR</strong> per ecosistemi automazione flessibili. 
+                        Soluzioni logistica, magazzino e trasporto interno intelligente.
+                    </p>
+                    <ul style="text-align: left; margin: 1rem 0; padding-left: 1.5rem;">
+                        <li>MiR AMR integration</li>
+                        <li>Ecosistemi automazione</li>
+                        <li>Logistica intelligente</li>
+                    </ul>
+                    <a href="#contact" class="service-cta">Prenota Consulenza AMR <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#contact" class="btn btn-primary" style="font-size: 1.2rem; padding: 1rem 2rem;">
+                    <i class="fas fa-paper-plane"></i> Contattami per una Consulenza Personalizzata
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">Esperienza</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>AI & Robotics Engineer</h3>
+                            <span class="timeline-company">Meko srl</span>
+                            <span class="timeline-date">gen 2024 - Presente</span>
+                        </div>
+                        <div class="timeline-location">
+                            <i class="fas fa-map-marker-alt"></i> Noventa di Piave, Veneto, Italia
+                        </div>
+                        <div class="timeline-description">
+                            <p>
+                                <strong>Servizi Freelance:</strong> Consulenza automazione con focus su robotica umanoide e collaborativa. 
+                                Lead R&D filone <strong>Unitree</strong> (umanoidi G1/H2, quadrupedi Go2/A2/B2). 
+                                Sviluppo POC, supporto programmazione piattaforme umanoidi, preventivi e progettazione proposte automazione.
+                            </p>
+                            <p>
+                                <strong>Tecnologie:</strong> Unitree Robotics, Universal Robots (cobot), MiR AMR. 
+                                Simulazioni MuJoCo, NVIDIA Isaac Sim, Gazebo. Programmazione ROS, Python, C#.
+                            </p>
+                            <div class="timeline-tech">
+                                <span class="tech-tag">Unitree G1</span>
+                                <span class="tech-tag">Unitree H2</span>
+                                <span class="tech-tag">Unitree Go2</span>
+                                <span class="tech-tag">Unitree A2</span>
+                                <span class="tech-tag">Unitree B2</span>
+                                <span class="tech-tag">MuJoCo</span>
+                                <span class="tech-tag">NVIDIA Isaac Sim</span>
+                                <span class="tech-tag">NVIDIA Sim</span>
+                                <span class="tech-tag">Gazebo</span>
+                                <span class="tech-tag">Digital Twin</span>
+                                <span class="tech-tag">Universal Robots</span>
+                                <span class="tech-tag">MiR AMRs</span>
+                                <span class="tech-tag">ROS</span>
+                                <span class="tech-tag">AI Accelerator</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Freelance Web Developer</h3>
+                            <span class="timeline-company">gpitton.it</span>
+                            <span class="timeline-date">mar 2023 - gen 2024</span>
+                        </div>
+                        <div class="timeline-description">
+                            <p>
+                                Sviluppo di applicazioni web utilizzando C#, integrandole con il back-end attraverso SQL. 
+                                Specializzato nella creazione di piattaforme e-commerce, fornendo formazione ai clienti e 
+                                integrando tecniche di funneling e strategie pubblicitarie.
+                            </p>
+                            <div class="timeline-tech">
+                                <span class="tech-tag">C#</span>
+                                <span class="tech-tag">SQL</span>
+                                <span class="tech-tag">E-commerce</span>
+                                <span class="tech-tag">Blazor</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Application Consultant Operations ERP</h3>
+                            <span class="timeline-company">Gruppo Omega</span>
+                            <span class="timeline-date">mar 2020 - mar 2023</span>
+                        </div>
+                        <div class="timeline-location">
+                            <i class="fas fa-map-marker-alt"></i> Quarto d'Altino, Veneto, Italia
+                        </div>
+                        <div class="timeline-description">
+                            <p>
+                                Consulente privato per una grande software house specializzata in soluzioni ERP/WMS/MES 
+                                per industrie manifatturiere. Importazione, estrazione e analisi dati utilizzando procedure SQL, 
+                                DevExpress Dashboards e Crystal Reports. Lavoro in team multidisciplinari: WMS, CRM, MRP e MES.
+                            </p>
+                            <div class="timeline-tech">
+                                <span class="tech-tag">ERP</span>
+                                <span class="tech-tag">WMS</span>
+                                <span class="tech-tag">MES</span>
+                                <span class="tech-tag">T-SQL</span>
+                                <span class="tech-tag">Crystal Reports</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Competenze</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fas fa-robot"></i> Robotica</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">Unitree G1</span>
+                        <span class="skill-item">Unitree H2</span>
+                        <span class="skill-item">Unitree Go2</span>
+                        <span class="skill-item">Unitree A2</span>
+                        <span class="skill-item">Unitree B2</span>
+                        <span class="skill-item">Universal Robots</span>
+                        <span class="skill-item">MiR AMRs</span>
+                        <span class="skill-item">Capra Robotics</span>
+                        <span class="skill-item">ROS</span>
+                        <span class="skill-item">Gazebo</span>
+                        <span class="skill-item">MuJoCo</span>
+                        <span class="skill-item">NVIDIA Isaac Sim</span>
+                        <span class="skill-item">NVIDIA Sim</span>
+                        <span class="skill-item">Digital Twin</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Programmazione</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">C#</span>
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">JavaScript</span>
+                        <span class="skill-item">TypeScript</span>
+                        <span class="skill-item">SQL</span>
+                        <span class="skill-item">HTML/CSS</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-brain"></i> AI & Machine Learning</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">LLM</span>
+                        <span class="skill-item">NLP</span>
+                        <span class="skill-item">AI Accelerator</span>
+                        <span class="skill-item">Agentic Systems</span>
+                        <span class="skill-item">Computer Vision</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-cloud"></i> Cloud & DevOps</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">AWS</span>
+                        <span class="skill-item">SaaS</span>
+                        <span class="skill-item">Blazor Web Server</span>
+                        <span class="skill-item">API Integration</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-database"></i> Database</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">SQL Server</span>
+                        <span class="skill-item">T-SQL</span>
+                        <span class="skill-item">Database Design</span>
+                        <span class="skill-item">Data Analysis</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-briefcase"></i> Business</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">Project Management</span>
+                        <span class="skill-item">Technical Sales</span>
+                        <span class="skill-item">Client Relations</span>
+                        <span class="skill-item">ERP/WMS/MES</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section id="partners" class="partners">
+        <div class="container">
+            <h2 class="section-title">Collaborazioni e Tecnologie</h2>
+            <div class="partners-content">
+                <div class="partners-text">
+                    <p>
+                        Ho collaborato con <strong>oltre 100 aziende</strong> su progetti IT e di robotica, 
+                        oltre alle più importanti università italiane e politecnici, contribuendo a progetti 
+                        di ricerca e sviluppo nel campo della robotica avanzata. I miei interventi sono comparsi 
+                        nelle <strong>più importanti TV italiane</strong>, portando l'innovazione robotica al grande pubblico.
+                    </p>
+                    <p>
+                        Guido un <strong>hub di collaboratori specializzati</strong>, inclusi PhD e professori 
+                        universitari, per lo sviluppo di proof-of-concept avanzati. Collaboro inoltre con 
+                        <strong>aziende robotiche con oltre 20 anni di esperienza</strong> e un network di 
+                        integratori per diverse soluzioni.
+                    </p>
+                </div>
+                <div class="robots-showcase">
+                    <h3>Tecnologie Principali</h3>
+                    <div class="robots-grid">
+                        <div class="robot-card">
+                            <div class="robot-image-container">
+                                <img src="images/unitree-humanoid.jpg" alt="Unitree Humanoid Robot - Robot Umanoide Unitree con tecnologia avanzata" class="robot-showcase-img" onerror="this.style.display='none'">
+                                <a href="https://www.linkedin.com/in/giovannipitton/" target="_blank" rel="noopener noreferrer" class="robot-image-link" title="Vedi progetti Unitree su LinkedIn">
+                                    <div class="robot-link-overlay">
+                                        <i class="fab fa-linkedin"></i> Vedi su LinkedIn
+                                    </div>
+                                </a>
+                            </div>
+                            <h4>Unitree Robotics</h4>
+                            <p>Robot Umanoidi <strong>G1 e H2</strong>, quadrupedi <strong>Go2, A2 e B2</strong>. Lead R&D su filone Unitree con simulazioni MuJoCo, NVIDIA Isaac Sim e Gazebo per digital twin.</p>
+                            <a href="#contact" class="robot-link">
+                                Richiedi Demo <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="robot-card">
+                            <div class="robot-image-container">
+                                <img src="images/universal-robots.png" alt="Universal Robots Cobot - Braccio Robotico Collaborativo con AI Accelerator" class="robot-showcase-img" onerror="this.style.display='none'">
+                                <a href="https://www.linkedin.com/in/giovannipitton/" target="_blank" rel="noopener noreferrer" class="robot-image-link" title="Vedi progetti Universal Robots su LinkedIn">
+                                    <div class="robot-link-overlay">
+                                        <i class="fab fa-linkedin"></i> Vedi su LinkedIn
+                                    </div>
+                                </a>
+                            </div>
+                            <h4>Universal Robots</h4>
+                            <p>Cobot collaborativi con integrazione <strong>AI Accelerator</strong> e NVIDIA Jetson Orin per automazione intelligente e sicura.</p>
+                            <a href="#contact" class="robot-link">
+                                Richiedi Demo <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="robot-card">
+                            <div class="robot-image-container">
+                                <img src="images/mir-amr.png" alt="MiR AMR - Mobile Industrial Robots - Autonomous Mobile Robots per automazione industriale" class="robot-showcase-img" onerror="this.style.display='none'">
+                                <a href="https://www.linkedin.com/in/giovannipitton/" target="_blank" rel="noopener noreferrer" class="robot-image-link" title="Vedi progetti MiR AMR su LinkedIn">
+                                    <div class="robot-link-overlay">
+                                        <i class="fab fa-linkedin"></i> Vedi su LinkedIn
+                                    </div>
+                                </a>
+                            </div>
+                            <h4>MiR AMR - Mobile Industrial Robots</h4>
+                            <p>Autonomous Mobile Robots per ecosistemi di automazione flessibili. Soluzioni per logistica, magazzino e trasporto interno intelligente in ambienti industriali complessi.</p>
+                            <a href="#contact" class="robot-link">
+                                Richiedi Demo <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Progetti</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3>SGAI - Legal AI Assistant</h3>
+                    <p>
+                        Chat agent LLM con oltre 1 milione di documenti tra sentenze tributarie, cassazione, 
+                        massimari di merito e ITV. Sistema di intelligenza artificiale dedicato alla consulenza 
+                        tributaria e legale con tutela totale del know-how.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">LLM</span>
+                        <span class="tech-tag">AI</span>
+                        <span class="tech-tag">LegalTech</span>
+                    </div>
+                    <a href="https://sgailegal.com" target="_blank" rel="noopener noreferrer" class="project-link">
+                        Visita il sito <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Unitree G1 - Programmazione Umanoide</h3>
+                    <p>
+                        Programmazione e integrazione del robot umanoide Unitree G1 per progetti artistici e 
+                        turistici. Collaborazione con Bressanone Turismo per performance innovative che uniscono 
+                        arte e tecnologia. Progetto presentato in eventi e media nazionali.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Unitree G1</span>
+                        <span class="tech-tag">Robotica</span>
+                        <span class="tech-tag">R&D</span>
+                    </div>
+                    <a href="https://www.linkedin.com/in/giovannipitton/" target="_blank" rel="noopener noreferrer" class="project-link">
+                        Vedi su LinkedIn <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3>AI Accelerator - Universal Robots</h3>
+                    <p>
+                        Sviluppo di proof-of-concept per l'integrazione di AI Accelerator con Universal Robots, 
+                        utilizzando NVIDIA Jetson Orin per applicazioni avanzate di rilevamento oggetti e 
+                        manipolazione intelligente.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Universal Robots</span>
+                        <span class="tech-tag">NVIDIA</span>
+                        <span class="tech-tag">AI</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>MiR AMR - Soluzioni Ecosistema</h3>
+                    <p>
+                        Progettazione e integrazione di soluzioni AMR (Autonomous Mobile Robots) di Mobile Industrial 
+                        Robots per creare ecosistemi di automazione flessibili e produttivi in ambienti industriali complessi.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">MiR</span>
+                        <span class="tech-tag">AMR</span>
+                        <span class="tech-tag">Automazione</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contatti</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contattami per una Consulenza</h3>
+                    <p>
+                        <strong>Richiedi una consulenza gratuita</strong> per analizzare le potenzialità di automazione 
+                        della tua azienda. Identifico le tecnologie più adatte (umanoidi Unitree, cobot Universal Robots, 
+                        AMR MiR) per ottenere i risultati che cerchi.
+                    </p>
+                    <div class="cta-box">
+                        <h4>🚀 Inizia Subito</h4>
+                        <p>Compila il modulo e riceverai una risposta entro 24 ore con una proposta personalizzata.</p>
+                    </div>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <a href="https://www.linkedin.com/in/giovannipitton/" target="_blank" rel="noopener noreferrer">
+                                LinkedIn Profile
+                            </a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-video"></i>
+                            <a href="https://www.linkedin.com/in/giovannipitton/" target="_blank" rel="noopener noreferrer">
+                                Vedi Video e Progetti su LinkedIn
+                            </a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>San Donà di Piave, Veneto, Italia</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-forms">
+                    <div class="form-container">
+                        <h3>Invia un Messaggio</h3>
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-group">
+                                <label for="name">Nome *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="company">Azienda</label>
+                                <input type="text" id="company" name="company">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Oggetto *</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Messaggio *</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i> Invia Messaggio
+                            </button>
+                            <div id="formMessage" class="form-message"></div>
+                        </form>
+                    </div>
+
+                    <div class="form-container">
+                        <h3>Newsletter Robotica</h3>
+                        <p><strong>Ricevi aggiornamenti esclusivi</strong> su nuove tecnologie, case study, video dimostrativi 
+                        e opportunità nel settore della robotica e automazione industriale.</p>
+                        <p class="newsletter-benefits">
+                            ✅ Case study reali<br>
+                            ✅ Video dimostrativi<br>
+                            ✅ Novità tecnologiche<br>
+                            ✅ Eventi e webinar
+                        </p>
+                        <form id="newsletterForm" class="newsletter-form">
+                            <div class="form-group">
+                                <label for="newsletterEmail">Email *</label>
+                                <input type="email" id="newsletterEmail" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="newsletterName">Nome</label>
+                                <input type="text" id="newsletterName" name="name">
+                            </div>
+                            <button type="submit" class="btn btn-secondary">
+                                <i class="fas fa-envelope"></i> Iscriviti
+                            </button>
+                            <div id="newsletterMessage" class="form-message"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Giovanni Pitton</h4>
+                    <p>Robotics and AI Full Stack Developer | Technical Sales</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Link</h4>
+                    <ul>
+                        <li><a href="https://www.linkedin.com/in/giovannipitton/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                        <li><a href="https://www.mekosrl.com" target="_blank" rel="noopener noreferrer">Meko srl</a></li>
+                        <li><a href="outreach.html">Outreach</a></li>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">Chi Sono</a></li>
+                        <li><a href="#contact">Contatti</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Competenze</h4>
+                    <ul>
+                        <li>Universal Robots</li>
+                        <li>Unitree Robotics</li>
+                        <li>MiR AMRs</li>
+                        <li>AI & Machine Learning</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Giovanni Pitton. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
