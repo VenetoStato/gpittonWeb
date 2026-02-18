@@ -5,33 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Giovanni Pitton - Consulenza Robotica e AI</title>
   <style>
-    body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f4f4; }
-    .wrapper { max-width: 600px; margin: 0 auto; background: #ffffff; }
-    .header { background: linear-gradient(135deg, #0052cc 0%, #0066ff 100%); padding: 32px 24px; text-align: center; }
-    .header h1 { color: #fff; margin: 0; font-size: 24px; font-weight: 600; }
-    .header p { color: rgba(255,255,255,0.9); margin: 8px 0 0; font-size: 14px; }
-    .content { padding: 32px 24px; color: #333; line-height: 1.6; }
-    .content h2 { color: #0052cc; font-size: 18px; margin: 0 0 16px; }
-    .content p { margin: 0 0 12px; font-size: 15px; }
-    .services { background: #f8fafc; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #0052cc; }
+    body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f1f5f9; }
+    .wrapper { max-width: 580px; margin: 0 auto; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-radius: 12px; overflow: hidden; }
+    .header { background: #f8fafc; padding: 28px 24px; text-align: center; border-bottom: 1px solid #e2e8f0; }
+    .header-inner { max-width: 360px; margin: 0 auto; }
+    .header-logo { height: 36px; width: auto; display: block; margin: 0 auto 14px; object-fit: contain; }
+    .header h1 { color: #0f172a; margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+    .header-sub { color: #475569; margin: 6px 0 0; font-size: 14px; font-weight: 500; }
+    .content { padding: 32px 28px; color: #334155; line-height: 1.65; font-size: 15px; }
+    .content p { margin: 0 0 14px; }
+    .content h2 { color: #0f172a; font-size: 16px; font-weight: 700; margin: 24px 0 12px; letter-spacing: -0.2px; }
+    .services { background: #f8fafc; border-radius: 10px; padding: 20px 24px; margin: 20px 0; border: 1px solid #e2e8f0; }
     .services ul { margin: 0; padding-left: 20px; }
-    .services li { margin: 8px 0; }
-    .cta { text-align: center; margin: 28px 0; }
-    .cta a { display: inline-block; background: #0052cc; color: #fff !important; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; }
-    .footer { background: #1a202c; color: #a0aec0; padding: 24px; text-align: center; font-size: 13px; }
-    .footer a { color: #63b3ed; text-decoration: none; }
+    .services li { margin: 8px 0; line-height: 1.55; }
+    .cta-wrap { text-align: center; margin: 28px 0; }
+    .cta { display: inline-block; background: #2563eb; color: #fff !important; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 15px; }
+    .signature { margin-top: 32px; margin-bottom: 32px; padding: 24px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0; }
+    .footer { background: #0f172a; color: #94a3b8; padding: 28px 24px; text-align: center; font-size: 12px; line-height: 1.8; }
+    .footer a { color: #7dd3fc; text-decoration: none; }
   </style>
 </head>
 <body>
   <div class="wrapper">
     <div class="header">
-      <h1>Giovanni Pitton</h1>
-      <p>Ingegnere Gestionale | Consulente Robotica e AI</p>
+      <div class="header-inner">
+        <img src="https://gpitton.com/images/Logo.png" alt="Logo Giovanni Pitton" class="header-logo" width="100" height="36">
+        <h1>Giovanni Pitton</h1>
+        <p class="header-sub">Ingegnere Gestionale | Consulente Robotica e AI</p>
+      </div>
     </div>
     <div class="content">
       <p>Buongiorno,</p>
-      <p>Sono <strong>Giovanni Pitton</strong>, Ingegnere Gestionale con oltre 13 anni di esperienza in robotica e automazione industriale.</p>
-      <p>Lavoro presso <strong>Meko srl</strong> e offro <strong>servizi freelance</strong> per aziende che vogliono innovare con robotica umanoide, cobot e AMR.</p>
+      <p>Lavorate con <strong>robotica</strong>, <strong>automazione</strong> o <strong>cobot</strong>? Vi invito a scoprire come posso supportare i vostri progetti con consulenza tecnica e POC reali.</p>
+      <p>Sono <strong>Giovanni Pitton</strong>, Ingegnere Gestionale e programmatore con oltre 13 anni di esperienza. Lavoro presso <strong>Meko srl</strong> e offro <strong>servizi freelance</strong> per aziende che vogliono innovare.</p>
       
       <h2>Cosa offro</h2>
       <div class="services">
@@ -39,22 +45,35 @@
           <li><strong>Consulenza automazione</strong> – Analisi processi, identificazione tecnologie adatte</li>
           <li><strong>Robot umanoidi Unitree</strong> (G1, H2) e quadrupedi (Go2, A2, B2)</li>
           <li><strong>Cobot Universal Robots</strong> e AMR MiR</li>
-          <li><strong>Sviluppo POC</strong> e proof-of-concept con simulazioni (MuJoCo, NVIDIA Isaac Sim)</li>
+          <li><strong>Sviluppo POC</strong> – simulazioni (MuJoCo, NVIDIA Isaac Sim) e <strong>POC fisici</strong>: metto in opera i prodotti, test e integrazione</li>
           <li><strong>Preventivi e progettazione</strong> proposte automazione</li>
         </ul>
       </div>
       
-      <p>Ho collaborato con <strong>100+ aziende</strong>, università e politecnici italiani. Hub di collaboratori: PhD, professori, aziende robotiche con 20+ anni di esperienza.</p>
+      <p>Collaboro con <strong>20+ aziende integratrici</strong>, le principali università italiane, politecnici e ITS. Hub di collaboratori: PhD, professori, aziende robotiche con oltre 20 anni di esperienza.</p>
       
-      <div class="cta">
-        <a href="https://gpitton.com">Visita gpitton.com</a>
+      <div class="cta-wrap">
+        <a href="https://gpitton.com" class="cta">Visita gpitton.com</a>
       </div>
       
-      <p>Sarei lieto di una breve call (15 min) per capire se posso supportare i vostri progetti di automazione.</p>
-      <p>Cordiali saluti,<br><strong>Giovanni Pitton</strong><br><a href="https://gpitton.com">gpitton.com</a> | <a href="https://linkedin.com/in/giovannipitton">LinkedIn</a></p>
+      <p>Sarei lieto di una breve call (15 min) per capire come posso supportare i vostri progetti. <strong>Scrivetemi o chiamatemi.</strong></p>
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" class="signature">
+        <tr>
+          <td width="64" valign="top" style="padding-right: 24px;">
+            <img src="https://gpitton.com/images/Presentation.png" alt="Giovanni Pitton" width="64" height="96" style="border-radius: 8px; display: block; object-fit: cover;">
+          </td>
+          <td valign="top">
+            <p style="margin: 0 0 4px; font-size: 15px; color: #475569;">Cordiali saluti,</p>
+            <p style="margin: 0 0 10px; font-size: 16px; font-weight: 700; color: #0f172a;">Giovanni Pitton</p>
+            <p style="margin: 0 0 4px; font-size: 14px;"><a href="mailto:info@gpitton.com" style="color: #2563eb; text-decoration: none; font-weight: 500;">info@gpitton.com</a> · <a href="tel:+393288216708" style="color: #2563eb; text-decoration: none; font-weight: 500;">328 821 6708</a></p>
+            <p style="margin: 0; font-size: 14px;"><a href="https://gpitton.com" style="color: #2563eb; text-decoration: none; font-weight: 500;">gpitton.com</a> · <a href="https://linkedin.com/in/giovannipitton" style="color: #2563eb; text-decoration: none; font-weight: 500;">LinkedIn</a></p>
+          </td>
+        </tr>
+      </table>
     </div>
     <div class="footer">
-      <p>Giovanni Pitton · San Donà di Piave, Veneto · <a href="https://gpitton.com">gpitton.com</a></p>
+      <p style="margin:0;">Giovanni Pitton · San Donà di Piave, Veneto</p>
+      <p style="margin:12px 0 0;"><a href="mailto:info@gpitton.com">info@gpitton.com</a> · <a href="tel:+393288216708">328 821 6708</a> · <a href="https://gpitton.com">gpitton.com</a></p>
     </div>
   </div>
 </body>
