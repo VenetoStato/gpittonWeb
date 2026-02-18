@@ -1,5 +1,6 @@
-// POST: invia mail outreach. Body: { list?: 'it'|'ch-no', token?: string }
+// POST: invia mail outreach. Body: { list?: 'it'|'ch-no', token?: string, offset?: number, limit?: number }
 // list: 'it' = lista-aziende-100.csv + mail IT | 'ch-no' = lista-aziende-ch-no.csv + mail EN
+// offset/limit: per batch (es. limit=80 evita timeout Vercel ~60s). Se assenti invia tutti.
 // Usa Mailgun (info@gpitton.com)
 
 const fs = require('fs');
@@ -42,9 +43,17 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const recipients = parseCSV(fs.readFileSync(csvPath, 'utf8'));
-    if (recipients.length === 0) {
+    let recipients = parseCSV(fs.readFileSync(csvPath, 'utf8'));
+    const total = recipients.length;
+    if (total === 0) {
       return res.status(400).json({ error: 'Nessun destinatario nella lista', csvPath });
+    }
+    const offset = Math.max(0, parseInt(req.body?.offset, 10) || 0);
+    const limit = parseInt(req.body?.limit, 10);
+    if (limit > 0) {
+      recipients = recipients.slice(offset, offset + limit);
+    } else if (offset > 0) {
+      recipients = recipients.slice(offset);
     }
     const htmlContent = fs.readFileSync(htmlPath, 'utf8');
     const textContent = htmlContent.replace(/<[^>]*>/g, '');
@@ -84,7 +93,10 @@ module.exports = async (req, res) => {
       success: true,
       message: `Inviate ${results.sent} mail, ${results.failed.length} fallite`,
       sent: results.sent,
-      failed: results.failed
+      failed: results.failed,
+      total,
+      nextOffset: offset + recipients.length,
+      hasMore: offset + recipients.length < total
     });
   } catch (error) {
     console.error(error);
