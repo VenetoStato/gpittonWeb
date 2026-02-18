@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
     });
 
     const result = await mg.messages.create(domain, {
-      from: `Giovanni Pitton <postmaster@${domain}>`,
+      from: `Giovanni Pitton <info@${domain}>`,
       to: toEmail,
       subject: 'Consulenza Robotica e AI - Giovanni Pitton',
       html: htmlContent,
