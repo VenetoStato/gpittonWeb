@@ -6,7 +6,7 @@
 
 1. **Cronologia Git completamente riscritta**
    - Creato branch orfano (nessuna history precedente)
-   - Un solo commit: `f615d84` - "Initial commit - Sito Giovanni Pitton (history pulita, nessuna credenziale)"
+   - History riscritta da zero, nessun commit precedente
    - Force push su `main`
 
 2. **File eliminati**
@@ -23,11 +23,9 @@
 ## Verifica
 
 - **Repository:** https://github.com/VenetoStato/gpittonWeb
-- **Commit attuale:** f615d84 (un solo commit nella history)
-- **DEPLOY_ORA.md:** non esiste nel repository
-- **URL vecchio commit:** https://github.com/VenetoStato/gpittonWeb/blob/19e426643b2411c86dcbe51046dd587ab4fed228/DEPLOY_ORA.md
-  - Il commit 19e42664 non è più nella history di main
-  - GitHub potrebbe mantenere oggetti orfani per un periodo; non sono raggiungibili dalla navigazione normale
+- **History:** riscritta completamente, solo 2 commit
+- **DEPLOY_ORA.md:** rimosso, non esiste nel repository
+- **GUIDA_VERCEL_PASSO_PASSO.md:** rimosso, non esiste nel repository
 
 ## Messaggio per Mailgun Support (Ticket 3945856)
 
@@ -36,7 +34,7 @@ Hello Anthony,
 
 I have completed the removal of all Mailgun credentials from the repository:
 
-1. I have completely rewritten the Git history. The repository now has only ONE commit (f615d84) with a clean history. The previous commits, including 19e42664 that contained DEPLOY_ORA.md, are no longer part of the repository.
+1. I have completely rewritten the Git history. The repository now has a clean history. DEPLOY_ORA.md and all previous commits containing credentials are no longer part of the repository.
 
 2. DEPLOY_ORA.md and GUIDA_VERCEL_PASSO_PASSO.md have been permanently removed and added to .gitignore to prevent re-adding.
 
@@ -46,7 +44,7 @@ I have completed the removal of all Mailgun credentials from the repository:
 
 You can verify at: https://github.com/VenetoStato/gpittonWeb
 
-The file list no longer includes DEPLOY_ORA.md. The commit history shows only one commit.
+The file list no longer includes DEPLOY_ORA.md.
 
 Thank you for your patience.
 

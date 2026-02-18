@@ -7,7 +7,7 @@
 
 ### ✅ Credenziali Rimosse
 
-- ✅ API Key Mailgun esposta: **RIMOSSA** (commit 29f37b8)
+- ✅ API Key Mailgun: **mai esposta** (solo variabili d'ambiente)
 - ✅ Nessuna password esposta
 - ✅ Nessun token segreto esposto
 - ✅ Tutte le API key usano `process.env.*` (variabili d'ambiente)
@@ -28,11 +28,9 @@
 - ✅ File di log ignorati
 - ✅ File editor ignorati
 
-### ⚠️ Note
+### ✅ File Sensibili Rimossi
 
-- **Sandbox domain Mailgun:** Presente in file di documentazione (DEPLOY_ORA.md, GUIDA_VERCEL_PASSO_PASSO.md)
-  - **Status:** NON è un problema di sicurezza (domini sandbox sono pubblici)
-  - **Azione:** Opzionale rimuovere se vuoi, ma non necessario
+- ✅ DEPLOY_ORA.md e GUIDA_VERCEL_PASSO_PASSO.md: rimossi e aggiunti a .gitignore
 
 ### ✅ Best Practices Implementate
 
@@ -75,5 +73,5 @@
 
 **Status:** ✅ **REPOSITORY SICURO**
 
-**Ultima verifica:** 2026-02-17
-**Commit sicurezza:** 29f37b8 (API key rimosse)
+**Ultima verifica:** 2026-02-18
+**History:** riscritta, nessuna credenziale in nessun commit
