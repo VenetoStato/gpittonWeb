@@ -1,6 +1,6 @@
 // POST: invia mail outreach a tutte le aziende in lista-aziende-100.csv
-// Body: { token?: string } - opzionale NEWSLETTER_AUTH_TOKEN per auth
-// Invia 1 email per destinatario (BCC non usato per privacy)
+// Usa Mailgun (info@gpitton.com). Body: { token?: string } - opzionale NEWSLETTER_AUTH_TOKEN
+// Invia 1 email per destinatario
 
 const fs = require('fs');
 const path = require('path');
@@ -28,12 +28,12 @@ module.exports = async (req, res) => {
     return res.status(401).json({ error: 'Token non valido. Imposta NEWSLETTER_AUTH_TOKEN in Vercel e passa token nel body o header.' });
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const fromEmail = process.env.EMAIL_FROM || 'Giovanni Pitton <onboarding@resend.dev>';
+  const apiKey = process.env.MAILGUN_API_KEY;
+  const domain = process.env.MAILGUN_DOMAIN || 'gpitton.com';
   const subject = 'Consulenza Robotica e AI - Giovanni Pitton';
 
   if (!apiKey) {
-    return res.status(500).json({ error: 'RESEND_API_KEY non configurata' });
+    return res.status(500).json({ error: 'MAILGUN_API_KEY non configurata' });
   }
 
   try {
@@ -41,34 +41,33 @@ module.exports = async (req, res) => {
     const htmlPath = path.join(__dirname, '..', 'mail-comunicazione.html');
     const recipients = parseCSV(fs.readFileSync(csvPath, 'utf8'));
     const htmlContent = fs.readFileSync(htmlPath, 'utf8');
+    const textContent = htmlContent.replace(/<[^>]*>/g, '');
+
+    const Mailgun = require('mailgun.js');
+    const formData = require('form-data');
+    const mailgun = new Mailgun(formData);
+    const mg = mailgun.client({
+      username: 'api',
+      key: apiKey,
+      url: 'https://api.eu.mailgun.net'
+    });
 
     const results = { sent: 0, failed: [] };
-    const DELAY_MS = 800;
+    const DELAY_MS = 600;
 
     for (let i = 0; i < recipients.length; i++) {
       const { azienda, email } = recipients[i];
       try {
-        const resResend = await fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${apiKey}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            from: fromEmail,
-            to: [email],
-            subject,
-            html: htmlContent
-          })
+        await mg.messages.create(domain, {
+          from: `Giovanni Pitton <info@${domain}>`,
+          to: email,
+          subject,
+          html: htmlContent,
+          text: textContent
         });
-        const data = await resResend.json();
-        if (resResend.ok) {
-          results.sent++;
-        } else {
-          results.failed.push({ azienda, email, error: data.message || 'Errore' });
-        }
+        results.sent++;
       } catch (err) {
-        results.failed.push({ azienda, email, error: err.message });
+        results.failed.push({ azienda, email, error: err.message || 'Errore' });
       }
       if (i < recipients.length - 1) {
         await new Promise(r => setTimeout(r, DELAY_MS));
