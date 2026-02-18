@@ -1,6 +1,6 @@
-// POST: invia mail outreach a tutte le aziende in lista-aziende-100.csv
-// Usa Mailgun (info@gpitton.com). Body: { token?: string } - opzionale NEWSLETTER_AUTH_TOKEN
-// Invia 1 email per destinatario
+// POST: invia mail outreach. Body: { list?: 'it'|'ch-no', token?: string }
+// list: 'it' = lista-aziende-100.csv + mail IT | 'ch-no' = lista-aziende-ch-no.csv + mail EN
+// Usa Mailgun (info@gpitton.com)
 
 const fs = require('fs');
 const path = require('path');
@@ -28,18 +28,24 @@ module.exports = async (req, res) => {
     return res.status(401).json({ error: 'Token non valido. Imposta NEWSLETTER_AUTH_TOKEN in Vercel e passa token nel body o header.' });
   }
 
+  const listType = req.body?.list || 'it';
+  const isCHNO = listType === 'ch-no';
+  const csvPath = path.join(__dirname, '..', isCHNO ? 'lista-aziende-ch-no.csv' : 'lista-aziende-100.csv');
+  const htmlPath = path.join(__dirname, '..', isCHNO ? 'mail-comunicazione-en.html' : 'mail-comunicazione.html');
+  const subject = isCHNO ? 'Robotics and AI Consulting - Giovanni Pitton' : 'Consulenza Robotica e AI - Giovanni Pitton';
+
   const apiKey = process.env.MAILGUN_API_KEY;
   const domain = process.env.MAILGUN_DOMAIN || 'gpitton.com';
-  const subject = 'Consulenza Robotica e AI - Giovanni Pitton';
 
   if (!apiKey) {
     return res.status(500).json({ error: 'MAILGUN_API_KEY non configurata' });
   }
 
   try {
-    const csvPath = path.join(__dirname, '..', 'lista-aziende-100.csv');
-    const htmlPath = path.join(__dirname, '..', 'mail-comunicazione.html');
     const recipients = parseCSV(fs.readFileSync(csvPath, 'utf8'));
+    if (recipients.length === 0) {
+      return res.status(400).json({ error: 'Nessun destinatario nella lista', csvPath });
+    }
     const htmlContent = fs.readFileSync(htmlPath, 'utf8');
     const textContent = htmlContent.replace(/<[^>]*>/g, '');
 
