@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista Contatti - Giovanni Pitton</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .list-page { padding: 2rem 1rem; max-width: 1200px; margin: 0 auto; }
+    .list-page h1 { margin-bottom: 1rem; }
+    .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .tab { padding: 0.5rem 1rem; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc; cursor: pointer; }
+    .tab.active { background: #2563eb; color: #fff; border-color: #2563eb; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    th { background: #f1f5f9; font-weight: 600; }
+    tr:hover { background: #f8fafc; }
+    .email { color: #2563eb; }
+    .loading { padding: 2rem; text-align: center; color: #64748b; }
+    .stats { margin-bottom: 1rem; color: #64748b; font-size: 0.95rem; }
+    .search { margin-bottom: 1rem; padding: 0.5rem 1rem; width: 100%; max-width: 400px; border: 1px solid #e2e8f0; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <div class="list-page">
+    <h1>Lista Contatti</h1>
+    <p class="stats">Visualizza e gestisci i contatti per le campagne outreach.</p>
+    <div class="tabs">
+      <button class="tab active" data-tab="ch-no">Svizzera + Norvegia (~1000)</button>
+      <button class="tab" data-tab="it">Italia Veneto/Friuli (110)</button>
+    </div>
+    <input type="text" class="search" id="search" placeholder="Cerca azienda, email, città, settore...">
+    <div id="tab-ch-no" class="tab-content active">
+      <div class="stats" id="stats-ch-no"></div>
+      <div class="table-wrap">
+        <table id="table-ch-no">
+          <thead><tr><th>Company</th><th>Email</th><th>City</th><th>Country</th><th>Sector</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <div id="tab-it" class="tab-content">
+      <div class="stats" id="stats-it"></div>
+      <div class="table-wrap">
+        <table id="table-it">
+          <thead><tr><th>Azienda</th><th>Email</th><th>Città</th><th>Provincia</th><th>Settore</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script>
+    const parseCSV = (text) => {
+      const lines = text.trim().split('\n');
+      const rows = [];
+      for (let i = 1; i < lines.length; i++) {
+        const parts = lines[i].split(';');
+        if (parts.length >= 2 && parts[1].includes('@')) {
+          rows.push(parts.map(p => p.trim()));
+        }
+      }
+      return rows;
+    };
+    const renderCHNO = (rows, filter = '') => {
+      const tbody = document.querySelector('#table-ch-no tbody');
+      tbody.innerHTML = '';
+      const f = filter.toLowerCase();
+      const filtered = rows.filter(r => !f || r.some(c => String(c).toLowerCase().includes(f)));
+      document.getElementById('stats-ch-no').textContent = `${filtered.length} contatti${filter ? ` (filtrati da ${rows.length})` : ''}`;
+      filtered.forEach(r => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${r[0]}</td><td class="email"><a href="mailto:${r[1]}">${r[1]}</a></td><td>${r[2] || ''}</td><td>${r[3] || ''}</td><td>${r[4] || ''}</td>`;
+        tbody.appendChild(tr);
+      });
+    };
+    const renderIT = (rows, filter = '') => {
+      const tbody = document.querySelector('#table-it tbody');
+      tbody.innerHTML = '';
+      const f = filter.toLowerCase();
+      const filtered = rows.filter(r => !f || r.some(c => String(c).toLowerCase().includes(f)));
+      document.getElementById('stats-it').textContent = `${filtered.length} contatti${filter ? ` (filtrati da ${rows.length})` : ''}`;
+      filtered.forEach(r => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${r[0]}</td><td class="email"><a href="mailto:${r[1]}">${r[1]}</a></td><td>${r[2] || ''}</td><td>${r[3] || ''}</td><td>${r[4] || ''}</td>`;
+        tbody.appendChild(tr);
+      });
+    };
+    let dataCHNO = [], dataIT = [];
+    Promise.all([
+      fetch('lista-aziende-ch-no.csv').then(r => r.text()),
+      fetch('lista-aziende-100.csv').then(r => r.text())
+    ]).then(([chNo, it]) => {
+      dataCHNO = parseCSV(chNo);
+      dataIT = parseCSV(it);
+      renderCHNO(dataCHNO);
+      renderIT(dataIT);
+    }).catch(err => {
+      document.querySelector('.list-page').innerHTML += '<p class="loading">Errore caricamento CSV. Assicurati che i file siano nella stessa cartella.</p>';
+    });
+    document.querySelectorAll('.tab').forEach(t => {
+      t.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+        document.getElementById('tab-' + t.dataset.tab).classList.add('active');
+      });
+    });
+    document.getElementById('search').addEventListener('input', e => {
+      const v = e.target.value;
+      renderCHNO(dataCHNO, v);
+      renderIT(dataIT, v);
+    });
+  </script>
+</body>
+</html>
