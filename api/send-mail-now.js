@@ -2,9 +2,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const MAIL_HTML = fs.readFileSync(path.join(__dirname, '..', 'mail-comunicazione.html'), 'utf8');
-
 module.exports = async (req, res) => {
+  const MAIL_HTML = fs.readFileSync(path.join(__dirname, '..', 'mail-comunicazione.html'), 'utf8');
   const apiKey = process.env.RESEND_API_KEY;
   const toEmail = 'giovanni.pitton2@gmail.com';
 
