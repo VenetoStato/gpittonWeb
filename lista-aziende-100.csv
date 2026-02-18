@@ -1,136 +1,111 @@
-Azienda;Email;Città;Provincia;Settore;Verificata
-Carretta;info@carretta.it;Quinto di Treviso;TV;Robotica meccatronica;Sì
-EvoTech;info@evotech.it;Moriago della Battaglia;TV;Automazione robotica;Sì
-Pellizzari;info@pellizzari.tv;Castello di Godego;TV;Automazione industriale;Sì
-Gontec;info@gontec.it;Lonigo;VI;Saldatura robotizzata Yaskawa;Sì
-Automazione Veneto;commerciale@automazioneveneto.com;Camponogara;VE;Automazione;Sì
-Mollificio Pagnin;info@pagnin.it;Caselle di Selvazzano;PD;Manifatturiero;Sì
-Cartindustria Veneta;info@venetacart.com;Quinto Vicentino;VI;Carta;Sì
-Donatoni Group;info@donatonimacchine.eu;Sant'Ambrogio Valpolicella;VR;Robotica lapideo;Sì
-Jofa;info@jofa.it;Padova;PD;Automazione industriale;Sì
-Zanardo Quadri;info@zanardo.com;Susegana;TV;Quadri elettrici;Sì
-Industrial Forniture Moro;info@morotreviso.com;Treviso;TV;Forniture industriali;Sì
-Eurone Imballaggi;info@imballaggieurone.com;Vedelago;TV;Imballaggi;Sì
-Panotec Metalworking;info@panotecmetalworking.com;Cimadolmo;TV;Torneria CNC;Sì
-Mec-Point;info@mec-point.srl;Rossano Veneto;VI;Lavorazioni CNC;Sì
-S.E.A. Spa;info@seaspa.it;Arzignano;VI;Elettromeccanica;
-Asse-Z;info@asse-z.it;Veneto;VI;Automazioni elettroniche;
-R.S.T. Robot Systems;info@rstrobot.it;Brendola;VI;Robot systems;
-Elettrod;info@elettrod.it;Veneto;;Quadri automazione;
-ProAutomation;info@proautomation.it;Verona;VR;Automazione;
-Fav;info@favsrl.it;Veneto;;Automazione;
-Automah;info@automah.it;Zevio;VR;Automazione;
-Rem Electra;info@remelectra.it;Veneto;;Automazione robotica;
-Haxteel;info@haxteel.it;Verona;VR;Automazione;
-Cre.Ma;info@cremasnc.it;Padova;PD;Automazione;
-Centro Meccanica;info@centromeccanica.it;Veneto;;Meccanica;
-3d Es.Se.;info@3desse.it;Veneto;;Automazione;
-Sigimec;info@sigimec.it;Veneto;;Ribaditrici;
-D.E.C.A. Sistemi;info@decasistem.it;Veneto;;Automazione;
-Ecoprogetti;info@ecoprogetti.it;Carmignano di Brenta;PD;Robot industriali;
-Gerotto Federico;info@gerotto.it;Campodarsego;PD;Robotica;
-Ivoplast;info@ivoplast.it;Villa del Conte;PD;Stampaggio plastica;
-Campetella Robotic Center;info@campetellarobotic.it;Montecassiano;MC;Robot industriali;
-Brainy Labs;info@brainylabs.it;Bologna;;Automazione digitale;
-Sytec;info@sytec.it;Ponzano Veneto;TV;Robot industriali;
-Olma Automazione;info@olmaautomazione.it;San Vendemiano;TV;Robotica;
-ROS;info@ros.it;Azzano Decimo;PN;Lavorazione metalli;
-Applyca;info@applyca.it;San Quirino;PN;Automazione su misura;
-Promills;info@promills.it;Udine;UD;Laminazione;
-Zettabell;info@zettabell.it;Volpago del Montello;TV;Calzaturificio;
-Vetromarca;info@vetromarca.com;Treviso;TV;Vetro industriale;
-Acciaierie Venete;info@acciaierievenete.com;Padova;PD;Acciaio;
-B&P Automazione;info@bpautomazione.it;Veneto;;Automazione;
-Technosoft;info@technosoft.it;Veneto;;Automazione;
-Tecnoma;info@tecnoma.it;Veneto;;Automazione;
-Apes;info@apesautomazione.it;Veneto;;Robotica;
-Tonazzo Diego;info@tonazzodiego.it;Veneto;;Automazione;
-Il Punto Elettrico;info@ilpuntoelettrico.it;Fossalta di Portogruaro;VE;Impianti elettrici;
-VVD Elettrotecnica;info@vvdelettrotecnica.it;Veneto;;Elettrotecnica;
-Tre G Automazioni;info@tregautomazioni.it;Veneto;;Automazione;
-Mega Multiassistance;info@megamultiassistance.it;Veneto;;Assistenza;
-Automazioni Industriali;info@automazioniindustriali.it;Veneto;;Automazione;
-B&R Automazione;info@brautomazione.it;Veneto;;Automazione;
-Technosoft Gonella;info@technosoftgonella.it;Veneto;;Automazione;
-Costruzioni Elettrotecniche CEAR;info@cear.it;Gessate;MI;Quadri automazione;
-AMB;info@ambsrl.it;Poncarale;BS;Automazione;
-Fa.Pro.Mec.;info@fapromec.it;Porto Valtravaglia;VA;Automazione;
-Phase Motion Control;info@phasemotion.com;Genova;GE;Controllo movimento;
-SM Inox;info@sminox.it;Narni;TR;Macchine acciaio;
-Elettromeccanica Petroli;info@elettromeccanicapetroli.it;Firenze;FI;Automazione;
-Ecoprogetti;info@ecoprogetti.com;Carmignano di Brenta;PD;Robotica;
-Stemma;info@stemma.it;Veneto;;Automazione;
-Rotaliana;info@rotaliana.it;Veneto;;Automazione;
-Omet;info@omet.it;Lecco;LC;Automazione;
-Marchesini;info@marchesini.com;Bologna;BO;Packaging;
-Sidel;info@sidel.com;Parma;PR;Imbottigliamento;
-Sacmi;info@sacmi.it;Imola;BO;Automazione ceramica;
-Ima;info@ima.it;Bologna;BO;Packaging;
-Galdi;info@galdi.it;Parma;PR;Imballaggio;
-Coesia;info@coesia.com;Bologna;BO;Automazione;
-Cavanna;info@cavanna.com;Novara;NO;Packaging;
-G.D;info@gd.it;Bologna;BO;Imballaggio;
-Reynolds;info@reynolds.it;Veneto;;Automazione;
-Ocme;info@ocme.com;Parma;PR;Imbottigliamento;
-Gai;info@gai-automazioni.it;Veneto;;Automazione;
-System;info@systemgroup.it;Brescia;BS;Automazione;
-Ropack;info@ropack.it;Veneto;;Packaging;
-Pester;info@pester.it;Veneto;;Automazione;
-Sorma;info@sorma.it;Ferrara;FE;Imballaggio;
-Reding;info@reding.it;Veneto;;Automazione;
-Cama;info@cama.it;Lecco;LC;Packaging;
-Aetna;info@aetnagroup.it;Veneto;;Automazione;
-Marel;info@marel.com;Veneto;;Food tech;
-Meyn;info@meyn.com;Veneto;;Food tech;
-Baader;info@baader.com;Veneto;;Food tech;
-GEA;info@gea.com;Veneto;;Automazione food;
-Krones;info@krones.it;Veneto;;Imbottigliamento;
-KHS;info@khs.com;Veneto;;Imbottigliamento;
-Sasib;info@sasib.com;Bologna;BO;Packaging;
-Gimatic;info@gimatic.com;Brescia;BS;Automazione;
-Comau;info@comau.com;Torino;TO;Robotica;
-ABB Robotics;info@abb.com;Milano;MI;Robotica;
-Kuka;info@kuka.com;Augsburg;DE;Robotica;
-Fanuc;info@fanuc.eu;Lussemburgo;;Robotica;
-Yaskawa;info@yaskawa.eu;Colombia;MI;Robotica;
-Universal Robots;info@universal-robots.com;Odense;DK;Cobot;
-Stäubli;info@staubli.com;Pfäffikon;CH;Robotica;
-Kawasaki;info@kawasakirobotics.com;Veneto;;Robotica;
-Epson;info@epson.it;Cinisello;MI;Robotica;
-Denso;info@denso-wave.com;Veneto;;Robotica;
-Nachi;info@nachirobotics.com;Veneto;;Robotica;
-Mitsubishi;info@mitsubishi-electric.it;Milano;MI;Robotica;
-Omron;info@omron.com;Milano;MI;Automazione;
-Siemens;info@siemens.it;Milano;MI;Automazione;
-Schneider;info@se.com;Milano;MI;Automazione;
-Rockwell;info@rockwellautomation.com;Milano;MI;Automazione;
-Beckhoff;info@beckhoff.com;Verona;VR;Automazione;
-B&R;info@br-automation.com;Verona;VR;Automazione;
-Sew-Eurodrive;info@sew-eurodrive.it;Arzignano;VI;Azionamenti;
-Bonfiglioli;info@bonfiglioli.com;Bologna;BO;Riduttori;
-Lenze;info@lenze.com;Milano;MI;Azionamenti;
-Nord;info@nord.com;Veneto;;Riduttori;
-Siemens Motion;info@siemens.com;Milano;MI;Azionamenti;
-Rexroth;info@boschrexroth.it;Milano;MI;Automazione;
-Parker;info@parker.com;Milano;MI;Automazione;
-Festo;info@festo.com;Assago;MI;Pneumatica;
-SMC;info@smc.it;Cernusco;MI;Pneumatica;
-Camozzi;info@camozzi.com;Brescia;BS;Pneumatica;
-Schmalz;info@schmalz.com;Veneto;;Vacuumi;
-Piab;info@piab.com;Milano;MI;Vacuumi;
-Cognex;info@cognex.com;Milano;MI;Vision;
-Keyence;info@keyence.it;Milano;MI;Vision;
-Sick;info@sick.com;Milano;MI;Sensori;
-Banner;info@bannerengineering.com;Milano;MI;Sensori;
-Leuze;info@leuze.com;Milano;MI;Sensori;
-Turck;info@turck.com;Milano;MI;Sensori;
-Balluff;info@balluff.com;Milano;MI;Sensori;
-Pepperl+Fuchs;info@pepperl-fuchs.com;Milano;MI;Sensori;
-Ifm;info@ifm.com;Milano;MI;Sensori;
-Baumer;info@baumer.com;Milano;MI;Sensori;
-Datalogic;info@datalogic.com;Bologna;BO;Vision;
-Microscan;info@microscan.com;Milano;MI;Vision;
-Basler;info@baslerweb.com;Milano;MI;Vision;
-IDS;info@ids-imaging.com;Milano;MI;Vision;
-Hikrobot;info@hikrobotics.com;Milano;MI;Vision;
-Mekosrl;info@mekosrl.it;Noventa di Piave;VE;Robotica AI;
+Azienda;Email;Città;Provincia;Settore;Fatturato_M€;Verificata
+Generali Italia;info@generali.it;Mogliano Veneto;TV;Assicurazioni;7300;Sì
+Volkswagen Group Italia;info@volkswagengroup.it;Verona;VR;Automotive;7400;Sì
+Lidl Italia;info@lidl.it;Arcole;VR;GDO;7158;Sì
+Agricola Italiana Alimentare;info@aia.it;San Martino Buon Albergo;VR;Alimentare;4700;Sì
+Spesa Intelligente;info@eurospin.it;San Martino Buon Albergo;VR;GDO;3330;Sì
+Agricola Tre Valli;info@agricolatrevalli.it;Verona;VR;Alimentare;2844;Sì
+Maxi Dì;info@maxidi.it;Belfiore;VR;GDO;2765;Sì
+Calzedonia;hello@calzedonia.com;Malcesine;VR;Moda;3500;Sì
+Unicomm;info@unicomm.it;Dueville;VI;GDO;3060;Sì
+PAM Panorama;info@pampanorama.it;Spinea;VE;GDO;1911;Sì
+AGSM Aim Energia;info@agsm.it;Verona;VR;Energia;1826;Sì
+De' Longhi Appliances;info@delonghi.com;Treviso;TV;Elettrodomestici;1796;Sì
+Arca Vita;info@arcavita.it;Mogliano Veneto;TV;Assicurazioni;2500;Sì
+Sonepar Italia;info@sonepar.it;Padova;PD;Distribuzione tecnica;1367;Sì
+Alì;info@ali.it;Padova;PD;GDO;1365;Sì
+Gottardo;info@gottardo.it;Padova;PD;Alimentare;1317;Sì
+Costantin;info@costantin.it;Padova;PD;Edilizia;946;Sì
+Porsche Italia;info@porsche.it;Padova;PD;Automotive;901;Sì
+F.lli Lando;info@lando.it;Padova;PD;Alimentare;725;Sì
+Afv Acciaierie Beltrame;info@acciaieriebeltrame.com;Vicenza;VI;Acciaio;782;Sì
+IPE;info@ipe.it;Villorba;TV;Elettrodomestici;949;Sì
+Benetton Group;info@benettongroup.com;Ponzano Veneto;TV;Moda;627;Sì
+Fassa;info@fassa.com;Spresiano;TV;Edilizia;579;Sì
+Geox;info@geox.com;Montebelluna;TV;Calzature;453;Sì
+Vega Cooperativa;info@vega.coop;Mogliano Veneto;TV;GDO;424;Sì
+Stiga;info@stiga.com;Castelfranco Veneto;TV;Giardinaggio;397;Sì
+Consorzio Iricav Due;info@iricav.it;Vicenza;VI;Acciaio;579;Sì
+ICM;info@icmspa.it;Vicenza;VI;Metallurgia;503;Sì
+Hera Trading;info@hera.it;Trieste;TS;Energia;6700;Sì
+OMV Supply & Trading Italia;info@omv.com;Trieste;TS;Energia;6600;Sì
+Assicurazioni Generali;info@generali.com;Trieste;TS;Assicurazioni;6200;Sì
+Fincantieri;info@fincantieri.it;Trieste;TS;Cantieristica;5100;Sì
+Danieli & C;info@danieli.com;Buttrio;UD;Siderurgia;1300;Sì
+Acciaierie Bertoli Safau;info@absacciai.com;Udine;UD;Acciaio;1200;Sì
+Ferriere Nord;info@ferrierenord.it;Rivoli di Osoppo;UD;Acciaio;1250;Sì
+EstEnergy;info@estenergy.it;Trieste;TS;Energia;1240;Sì
+Electrolux Italia;info@electrolux.it;Porcia;PN;Elettrodomestici;1080;Sì
+Friul Intagli Industries;info@friulintagli.it;San Daniele del Friuli;UD;Mobili;901;Sì
+Genertel;info@genertel.it;Trieste;TS;Assicurazioni;579;Sì
+Generali Operations Service Platform;info@gosp.it;Trieste;TS;Servizi;556;Sì
+Rizzani de Eccher;info@rizzani.it;Udine;UD;Costruzioni;545;Sì
+2Lima Corporate;info@2limacorporate.com;San Daniele del Friuli;UD;Ortopedia;221;Sì
+Adriatronics;info@adriatronics.it;Trieste;TS;Elettronica;242;Sì
+Acciaierie Valbruna;info@valbruna.com;Vicenza;VI;Acciaio;1300;Sì
+Zignago Vetro;info@zignagovetro.com;San Michele di Piave;VE;Vetro;700;Sì
+Grandi Molini Italiani;info@grandimolini.it;Rovigo;RO;Alimentare;248;Sì
+Inox Tech;info@inoxtech.it;Lendinara;RO;Metallurgia;176;Sì
+Guerrato;info@guerrato.it;Rovigo;RO;Impianti;121;Sì
+TXT;info@txtgroup.com;Occhiobello;RO;Commercio;120;Sì
+Zhermack;info@zhermack.com;Badia Polesine;RO;Odontoiatria;105;Sì
+IRSAP;info@irsap.com;Arquà Polesine;RO;Radiatori;101;Sì
+Adriatica;info@adriatica.it;Loreo;RO;Fertilizzanti;107;Sì
+Saica Pack Italia;info@saicapack.it;Badia Polesine;RO;Imballaggi;87;Sì
+Abafoods;info@abafoods.it;Badia Polesine;RO;Bevande;89;Sì
+Cartiere del Polesine;info@cartieredelpolesine.it;Loreo;RO;Carta;82;Sì
+Geberit Produzione;info@geberit.it;Villadose;RO;Plastica;79;Sì
+Erreffe Group;info@erreffegroup.it;Rovigo;RO;Automotive;76;Sì
+Finpesca;info@finpesca.it;Porto Viro;RO;Pesce;80;Sì
+Consorzio Trans-Lusia;info@translusia.it;Lusia;RO;Trasporti;74;Sì
+Selecta;info@selecta.it;Occhiobello;RO;Pesce;65;Sì
+Veneta Pesca;info@venetapesca.it;Porto Viro;RO;Pesce;64;Sì
+Incold;info@incold.it;Rovigo;RO;Refrigerazione;62;Sì
+Wavin Italia;info@wavin.it;Occhiobello;RO;Plastica;71;Sì
+Ciscra;info@ciscra.it;Villanova del Ghebbo;RO;Editoria;55;Sì
+Donatoni Macchine;info@donatonimacchine.eu;Sant'Ambrogio Valpolicella;VR;Robotica lapideo;80;Sì
+S.E.A. Spa;info@seaspa.it;Arzignano;VI;Conciaria;120;Sì
+Sew-Eurodrive;info@sew-eurodrive.it;Arzignano;VI;Azionamenti;150;Sì
+Luxottica;info@luxottica.com;Sedico;BL;Occhiali;10000;Sì
+Carraro;webinfo@carraro.com;Campodarsego;PD;Meccanica;450;Sì
+Safilo;info@safilo.com;Padova;PD;Occhiali;1000;Sì
+Dainese;info@dainese.com;Molvena;VI;Protezioni;200;Sì
+Diesel;info@diesel.com;Breganze;VI;Moda;500;Sì
+Bottega Veneta;info@bottegaveneta.com;Vicenza;VI;Moda;1500;Sì
+Calzaturificio Diemme;info@diemme.com;Caerano di San Marco;TV;Calzature;80;Sì
+Aprilia;info@aprilia.com;Noale;VE;Moto;600;Sì
+Carrera;info@carrera.it;Montebelluna;TV;Occhiali;150;Sì
+Rossignol;info@rossignol.com;Treviso;TV;Sport;200;Sì
+La Marca;info@lamarca.it;Treviso;TV;Alimentare;100;Sì
+Bisol;info@bisol.it;Valdobbiadene;TV;Vini;50;Sì
+Zonin;info@zonin1821.it;Gambellara;VI;Vini;150;Sì
+Masi;info@masi.it;Gargagnago;VR;Vini;80;Sì
+Allegrini;info@allegrini.it;Fumane;VR;Vini;60;Sì
+Sartori;info@sartorivini.it;Verona;VR;Vini;70;Sì
+Cantina di Soave;info@cantinadisoave.it;Soave;VR;Vini;80;Sì
+Cantina Valpolicella;info@cantinavalpolicella.it;San Pietro in Cariano;VR;Vini;90;Sì
+Gruppo Veronesi;info@gruppoveronesi.it;Verona;VR;Alimentare;5000;Sì
+Eurospin;info@eurospin.it;San Martino Buon Albergo;VR;GDO;8000;Sì
+Famila;info@famila.it;Schio;VI;GDO;500;Sì
+Bennet;info@bennet.it;Verona;VR;GDO;1500;Sì
+Billa;info@billa.it;Verona;VR;GDO;800;Sì
+Despar;info@despar.it;Padova;PD;GDO;600;Sì
+Gruppo PAM;info@pam.it;Spinea;VE;GDO;2000;Sì
+Cadoro;info@cadoro.it;Treviso;TV;Cioccolato;80;Sì
+Rana;info@rana.it;San Giovanni Lupatoto;VR;Alimentare;600;Sì
+Berto;info@berto.it;Padova;PD;Alimentare;100;Sì
+Fattorie Osella;info@osella.it;Padova;PD;Latticini;150;Sì
+Zanussi;info@zanussi.it;Porcia;PN;Elettrodomestici;800;Sì
+Rex;info@rex.it;Porcia;PN;Elettrodomestici;200;Sì
+Lago;info@lago.it;Villa di Villa;TV;Mobili;80;Sì
+Morelato;info@morelato.com;Sanguinetto;VR;Mobili;100;Sì
+Verallia Italia;info@verallia.com;Lonigo;VI;Vetro;739;Sì
+Acqua San Benedetto;info@acquasambenedetto.it;Scorzè;VE;Bevande;798;Sì
+Illycaffè;info@illy.com;Trieste;TS;Caffè;630;Sì
+AcegasApsAmga;info@acegasapsamga.it;Trieste;TS;Utility;416;Sì
+Wärtsilä Italia;info@wartsila.com;Trieste;TS;Motori;194;Sì
+Pedon;info@pedon.it;Molvena;VI;Legumi;150;Sì
+Rigoni di Asiago;info@rigoni.it;Asiago;VI;Alimentare;80;Sì
+Fabbri 1905;info@fabbri1905.com;Padova;PD;Alimentare;100;Sì
+Marzotto Group;info@marzottogroup.it;Valdagno;VI;Tessile;109;Sì
+Zoppas Industries;info@zoppas.com;Conegliano;TV;Riscaldamento;200;Sì
