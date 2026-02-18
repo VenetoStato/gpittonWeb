@@ -1,4 +1,5 @@
 // GET: invia mail outreach via Mailgun a giovanni.pitton2@gmail.com
+// ?lang=en → mail inglese (CH/NO) | default → mail italiana
 // Usa api.eu.mailgun.net (EU region)
 // Richiede: MAILGUN_API_KEY, MAILGUN_DOMAIN (gpitton.com)
 
@@ -9,6 +10,7 @@ module.exports = async (req, res) => {
   const apiKey = process.env.MAILGUN_API_KEY;
   const domain = process.env.MAILGUN_DOMAIN || 'gpitton.com';
   const toEmail = 'giovanni.pitton2@gmail.com';
+  const isEN = (req.query?.lang || '').toLowerCase() === 'en';
 
   if (!apiKey) {
     return res.status(500).json({
@@ -18,8 +20,10 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const htmlPath = path.join(__dirname, '..', 'mail-comunicazione.html');
+    const htmlFile = isEN ? 'mail-comunicazione-en.html' : 'mail-comunicazione.html';
+    const htmlPath = path.join(__dirname, '..', htmlFile);
     const htmlContent = fs.readFileSync(htmlPath, 'utf8');
+    const subject = isEN ? 'Robotics and AI Consulting - Giovanni Pitton' : 'Consulenza Robotica e AI - Giovanni Pitton';
 
     const Mailgun = require('mailgun.js');
     const formData = require('form-data');
@@ -33,7 +37,7 @@ module.exports = async (req, res) => {
     const result = await mg.messages.create(domain, {
       from: `Giovanni Pitton <info@${domain}>`,
       to: toEmail,
-      subject: 'Consulenza Robotica e AI - Giovanni Pitton',
+      subject,
       html: htmlContent,
       text: htmlContent.replace(/<[^>]*>/g, '')
     });
