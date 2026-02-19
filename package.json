@@ -5,6 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "npx http-server . -p 8080 -o",
+    "build": "echo Build OK",
     "deploy": "git add . && git commit -m 'Update website' && git push origin main"
   },
   "repository": {
