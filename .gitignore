@@ -12,6 +12,9 @@ Thumbs.db
 *.swo
 *~
 
+# Dependencies
+node_modules/
+
 # Logs
 *.log
 
