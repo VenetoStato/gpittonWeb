@@ -1,19 +1,15 @@
 {
   "version": 2,
   "redirects": [
-    { "source": "/outreach.html", "destination": "/login.html?redirect=outreach.html", "permanent": false },
-    { "source": "/outreach", "destination": "/login.html?redirect=outreach.html", "permanent": false },
-    { "source": "/list-contatti.html", "destination": "/login.html?redirect=list-contatti.html", "permanent": false },
-    { "source": "/list-contatti", "destination": "/login.html?redirect=list-contatti.html", "permanent": false }
+    {"source": "/outreach.html", "destination": "/login.html?redirect=outreach.html", "permanent": false},
+    {"source": "/outreach", "destination": "/login.html?redirect=outreach.html", "permanent": false},
+    {"source": "/list-contatti.html", "destination": "/login.html?redirect=list-contatti.html", "permanent": false},
+    {"source": "/list-contatti", "destination": "/login.html?redirect=list-contatti.html", "permanent": false}
   ],
   "rewrites": [
-    { "source": "/app/outreach", "destination": "/api/serve-protected?page=outreach" },
-    { "source": "/app/list-contatti", "destination": "/api/serve-protected?page=list-contatti" },
-    { "source": "/lista-aziende-ch-no.csv", "destination": "/api/lista-aziende?list=ch-no" },
-    { "source": "/lista-aziende-100.csv", "destination": "/api/lista-aziende?list=it" }
-  ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/(.*)", "dest": "/$1" }
+    {"source": "/app/outreach", "destination": "/api/serve-protected?page=outreach"},
+    {"source": "/app/list-contatti", "destination": "/api/serve-protected?page=list-contatti"},
+    {"source": "/lista-aziende-ch-no.csv", "destination": "/api/lista-aziende?list=ch-no"},
+    {"source": "/lista-aziende-100.csv", "destination": "/api/lista-aziende?list=it"}
   ]
 }
