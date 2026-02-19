@@ -20,6 +20,9 @@ Thumbs.db
 .env.local
 .env.*.local
 
+# Pagine protette - servite solo via API (mai come static)
+# outreach.html e list-contatti.html sono in api/_templates/
+
 # File rimossi per Mailgun compliance - non riaggiungere
 DEPLOY_ORA.md
 GUIDA_VERCEL_PASSO_PASSO.md

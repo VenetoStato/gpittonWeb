@@ -11,6 +11,7 @@ const PAGES = {
   outreach: 'outreach.html',
   'list-contatti': 'list-contatti.html'
 };
+const TEMPLATES_DIR = path.join(__dirname, '_templates');
 
 module.exports = async (req, res) => {
   if (req.method !== 'GET') {
@@ -19,7 +20,7 @@ module.exports = async (req, res) => {
 
   const page = (req.query?.page || 'outreach').toLowerCase();
   const filename = PAGES[page] || PAGES.outreach;
-  const filePath = path.join(__dirname, '..', filename);
+  const filePath = path.join(TEMPLATES_DIR, filename);
 
   const secret = process.env.OUTREACH_JWT_SECRET;
   const cookie = req.headers.cookie || '';
