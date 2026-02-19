@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accedi - Giovanni Pitton</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="images/Logo.png">
+    <style>
+        .login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; text-align: center; }
+        .login-box { background: #fff; border-radius: 12px; padding: 2.5rem; box-shadow: 0 10px 40px rgba(0,0,0,0.1); max-width: 400px; width: 100%; }
+        .login-box h1 { margin-bottom: 0.5rem; font-size: 1.5rem; }
+        .login-box p { color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.9rem; }
+        .login-box input { width: 100%; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 1rem; margin-bottom: 1rem; }
+        .login-box input:focus { outline: none; border-color: var(--primary-color); }
+        .login-box button { width: 100%; padding: 0.75rem 1rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+        .btn-password { background: var(--gradient-blue); color: #fff; margin-bottom: 1rem; }
+        .btn-password:hover { opacity: 0.9; }
+        .btn-google { background: #fff; border: 1px solid #e2e8f0; color: #333; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+        .btn-google:hover { background: #f8fafc; }
+        .divider { margin: 1.5rem 0; color: #94a3b8; font-size: 0.85rem; }
+        .error-msg { color: #dc2626; font-size: 0.9rem; margin-top: 0.5rem; }
+        .back-link { display: inline-block; margin-top: 1.5rem; color: var(--primary-color); text-decoration: none; font-size: 0.9rem; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="login-page">
+        <div class="login-box">
+            <h1><i class="fas fa-lock"></i> Accedi</h1>
+            <p>Area riservata. Solo utenti autorizzati.</p>
+            <form id="loginForm">
+                <input type="password" id="password" name="password" placeholder="Password" required autocomplete="current-password">
+                <button type="submit" class="btn-password"><i class="fas fa-arrow-right"></i> Accedi con password</button>
+            </form>
+            <div class="divider">— oppure —</div>
+            <button type="button" class="btn-google" id="btnGoogle" title="Solo giovanni.pitton2@gmail.com">
+                <i class="fab fa-google"></i> Accedi con Google
+            </button>
+            <div id="errorMsg" class="error-msg"></div>
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Torna alla Home</a>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirect = urlParams.get('redirect') || 'outreach.html';
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const err = document.getElementById('errorMsg');
+            err.textContent = '';
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifica...';
+            try {
+                const res = await fetch('/api/auth-login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: document.getElementById('password').value, redirect })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    window.location.href = data.redirect || redirect;
+                } else {
+                    err.textContent = data.error || 'Errore';
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-arrow-right"></i> Accedi con password';
+                }
+            } catch (e) {
+                err.textContent = 'Errore di connessione';
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-arrow-right"></i> Accedi con password';
+            }
+        });
+
+        document.getElementById('btnGoogle').addEventListener('click', () => {
+            document.getElementById('errorMsg').textContent = 'Configura GOOGLE_CLIENT_ID in Vercel per abilitare Google Sign-In.';
+        });
+    </script>
+
+    <!-- Google Sign-In (opzionale - richiede GOOGLE_CLIENT_ID) -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        // Se GOOGLE_CLIENT_ID è configurato, puoi abilitare il bottone qui
+        // document.getElementById('btnGoogle').onclick = () => { google.accounts.id.initialize({...}); google.accounts.id.prompt(); };
+    </script>
+</body>
+</html>

@@ -1,13 +1,15 @@
 {
   "version": 2,
+  "rewrites": [
+    { "source": "/outreach.html", "destination": "/api/serve-protected?page=outreach" },
+    { "source": "/outreach", "destination": "/api/serve-protected?page=outreach" },
+    { "source": "/list-contatti.html", "destination": "/api/serve-protected?page=list-contatti" },
+    { "source": "/list-contatti", "destination": "/api/serve-protected?page=list-contatti" },
+    { "source": "/lista-aziende-ch-no.csv", "destination": "/api/lista-aziende?list=ch-no" },
+    { "source": "/lista-aziende-100.csv", "destination": "/api/lista-aziende?list=it" }
+  ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }

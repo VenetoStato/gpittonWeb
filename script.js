@@ -13,16 +13,16 @@ window.addEventListener('scroll', () => {
 });
 
 // Mobile menu toggle
-hamburger.addEventListener('click', () => {
+if (hamburger && navMenu) hamburger.addEventListener('click', () => {
     navMenu.classList.toggle('active');
-    hamburger.classList.toggle('active');
+    if (hamburger) hamburger.classList.toggle('active');
 });
 
 // Close mobile menu when clicking on a link
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
+        if (hamburger) hamburger.classList.remove('active');
     });
 });
 
@@ -48,7 +48,7 @@ const API_BASE_URL = window.location.origin; // Usa il dominio corrente (funzion
 const contactForm = document.getElementById('contactForm');
 const formMessage = document.getElementById('formMessage');
 
-contactForm.addEventListener('submit', async (e) => {
+if (contactForm) contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const formData = {
@@ -81,25 +81,20 @@ contactForm.addEventListener('submit', async (e) => {
             throw new Error(data.error || 'Errore nell\'invio');
         }
 
-        // Success message
-        formMessage.textContent = 'Messaggio inviato con successo! Ti risponderò al più presto.';
-        formMessage.className = 'form-message success';
+        if (formMessage) {
+            formMessage.textContent = 'Messaggio inviato con successo! Ti risponderò al più presto.';
+            formMessage.className = 'form-message success';
+            setTimeout(() => { formMessage.style.display = 'none'; }, 5000);
+        }
         contactForm.reset();
-        
-        // Hide message after 5 seconds
-        setTimeout(() => {
-            formMessage.style.display = 'none';
-        }, 5000);
 
     } catch (error) {
         console.error('Error sending email:', error);
-        formMessage.textContent = 'Errore nell\'invio del messaggio. Riprova più tardi o contattami direttamente su LinkedIn.';
-        formMessage.className = 'form-message error';
-        
-        // Hide message after 5 seconds
-        setTimeout(() => {
-            formMessage.style.display = 'none';
-        }, 5000);
+        if (formMessage) {
+            formMessage.textContent = 'Errore nell\'invio del messaggio. Riprova più tardi o contattami direttamente su LinkedIn.';
+            formMessage.className = 'form-message error';
+            setTimeout(() => { formMessage.style.display = 'none'; }, 5000);
+        }
     } finally {
         submitButton.innerHTML = originalText;
         submitButton.disabled = false;
@@ -110,7 +105,7 @@ contactForm.addEventListener('submit', async (e) => {
 const newsletterForm = document.getElementById('newsletterForm');
 const newsletterMessage = document.getElementById('newsletterMessage');
 
-newsletterForm.addEventListener('submit', async (e) => {
+if (newsletterForm) newsletterForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const email = document.getElementById('newsletterEmail').value;
@@ -139,24 +134,20 @@ newsletterForm.addEventListener('submit', async (e) => {
         }
 
         // Success message
-        newsletterMessage.textContent = 'Iscrizione completata! Grazie per esserti iscritto.';
-        newsletterMessage.className = 'form-message success';
+        if (newsletterMessage) {
+            newsletterMessage.textContent = 'Iscrizione completata! Grazie per esserti iscritto.';
+            newsletterMessage.className = 'form-message success';
+            setTimeout(() => { newsletterMessage.style.display = 'none'; }, 5000);
+        }
         newsletterForm.reset();
-        
-        // Hide message after 5 seconds
-        setTimeout(() => {
-            newsletterMessage.style.display = 'none';
-        }, 5000);
 
     } catch (error) {
         console.error('Error subscribing to newsletter:', error);
-        newsletterMessage.textContent = 'Errore nell\'iscrizione. Riprova più tardi.';
-        newsletterMessage.className = 'form-message error';
-        
-        // Hide message after 5 seconds
-        setTimeout(() => {
-            newsletterMessage.style.display = 'none';
-        }, 5000);
+        if (newsletterMessage) {
+            newsletterMessage.textContent = 'Errore nell\'iscrizione. Riprova più tardi.';
+            newsletterMessage.className = 'form-message error';
+            setTimeout(() => { newsletterMessage.style.display = 'none'; }, 5000);
+        }
     } finally {
         submitButton.innerHTML = originalText;
         submitButton.disabled = false;
@@ -213,53 +204,38 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Cookie Consent Banner
+// Cookie Consent Banner (GDPR)
 const cookieBanner = document.getElementById('cookieBanner');
 const acceptCookies = document.getElementById('acceptCookies');
 const rejectCookies = document.getElementById('rejectCookies');
 
-// Check if user has already made a choice
 function getCookieConsent() {
     return localStorage.getItem('cookieConsent');
 }
 
 function setCookieConsent(value) {
     localStorage.setItem('cookieConsent', value);
-    // Set cookie expiry to 1 year
     const expiryDate = new Date();
     expiryDate.setFullYear(expiryDate.getFullYear() + 1);
     document.cookie = `cookieConsent=${value}; expires=${expiryDate.toUTCString()}; path=/; SameSite=Lax`;
 }
 
-// Show banner if no consent has been given
-if (!getCookieConsent()) {
-    setTimeout(() => {
-        cookieBanner.classList.add('show');
-    }, 1000); // Show after 1 second
+if (cookieBanner && acceptCookies && rejectCookies) {
+    if (!getCookieConsent()) {
+        setTimeout(() => cookieBanner.classList.add('show'), 1000);
+    }
+    acceptCookies.addEventListener('click', () => {
+        setCookieConsent('accepted');
+        cookieBanner.classList.remove('show');
+        if (typeof gtag !== 'undefined') {
+            gtag('consent', 'update', { 'analytics_storage': 'granted' });
+        }
+    });
+    rejectCookies.addEventListener('click', () => {
+        setCookieConsent('rejected');
+        cookieBanner.classList.remove('show');
+        if (typeof gtag !== 'undefined') {
+            gtag('consent', 'update', { 'analytics_storage': 'denied' });
+        }
+    });
 }
-
-// Accept cookies
-acceptCookies.addEventListener('click', () => {
-    setCookieConsent('accepted');
-    cookieBanner.classList.remove('show');
-    
-    // Enable Google Analytics if consent given
-    if (typeof gtag !== 'undefined') {
-        gtag('consent', 'update', {
-            'analytics_storage': 'granted'
-        });
-    }
-});
-
-// Reject cookies
-rejectCookies.addEventListener('click', () => {
-    setCookieConsent('rejected');
-    cookieBanner.classList.remove('show');
-    
-    // Disable Google Analytics if consent rejected
-    if (typeof gtag !== 'undefined') {
-        gtag('consent', 'update', {
-            'analytics_storage': 'denied'
-        });
-    }
-});

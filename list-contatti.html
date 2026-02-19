@@ -90,15 +90,19 @@
     };
     let dataCHNO = [], dataIT = [];
     Promise.all([
-      fetch('lista-aziende-ch-no.csv').then(r => r.text()),
-      fetch('lista-aziende-100.csv').then(r => r.text())
+      fetch('/api/lista-aziende?list=ch-no', { credentials: 'include' }).then(r => { if (!r.ok) throw new Error('auth'); return r.text(); }),
+      fetch('/api/lista-aziende?list=it', { credentials: 'include' }).then(r => { if (!r.ok) throw new Error('auth'); return r.text(); })
     ]).then(([chNo, it]) => {
       dataCHNO = parseCSV(chNo);
       dataIT = parseCSV(it);
       renderCHNO(dataCHNO);
       renderIT(dataIT);
     }).catch(err => {
-      document.querySelector('.list-page').innerHTML += '<p class="loading">Errore caricamento CSV. Assicurati che i file siano nella stessa cartella.</p>';
+      if (err.message === 'auth') {
+        window.location.href = '/login.html?redirect=' + encodeURIComponent('list-contatti.html');
+      } else {
+        document.querySelector('.list-page').innerHTML += '<p class="loading">Errore caricamento CSV.</p>';
+      }
     });
     document.querySelectorAll('.tab').forEach(t => {
       t.addEventListener('click', () => {
