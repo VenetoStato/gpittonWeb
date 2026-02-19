@@ -99,7 +99,7 @@
       renderIT(dataIT);
     }).catch(err => {
       if (err.message === 'auth') {
-        window.location.href = '/login.html?redirect=' + encodeURIComponent('list-contatti.html');
+        window.location.href = '/login.html?redirect=list-contatti.html';
       } else {
         document.querySelector('.list-page').innerHTML += '<p class="loading">Errore caricamento CSV.</p>';
       }

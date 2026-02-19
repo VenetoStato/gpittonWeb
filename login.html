@@ -46,6 +46,7 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const redirect = urlParams.get('redirect') || 'outreach.html';
+        const appRedirect = redirect.replace('.html', '') === 'list-contatti' ? '/app/list-contatti' : '/app/outreach';
 
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -62,7 +63,7 @@
                 });
                 const data = await res.json();
                 if (data.success) {
-                    window.location.href = data.redirect || redirect;
+                    window.location.href = data.redirect || appRedirect;
                 } else {
                     err.textContent = data.error || 'Errore';
                     btn.disabled = false;

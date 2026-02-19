@@ -56,7 +56,8 @@ module.exports = async (req, res) => {
 
     const isProd = process.env.VERCEL_ENV === 'production';
     res.setHeader('Set-Cookie', `${COOKIE_NAME}=${token}; Path=/; Max-Age=${COOKIE_MAX_AGE}; SameSite=Lax; ${isProd ? 'Secure; ' : ''}HttpOnly`);
-    return res.status(200).json({ success: true, redirect: body.redirect || '/outreach.html' });
+    const redirect = (body.redirect || 'outreach.html').replace(/\.html$/, '');
+    return res.status(200).json({ success: true, redirect: '/app/' + (redirect === 'list-contatti' ? 'list-contatti' : 'outreach') });
   } catch (e) {
     console.error('Auth error:', e);
     return res.status(500).json({ error: e.message || 'Errore login' });
