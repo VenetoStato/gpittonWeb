@@ -32,3 +32,7 @@ Dopo la chiusura dell'account Mailgun, usa **Brevo** (ex Sendinblue):
 python unisci_liste_italiane.py   # crea lista-aziende-it-300.csv
 python run_scraper_300.py        # visita siti, verifica email, output lista-300-verificate.csv
 ```
+
+**Scraper potenziato:** cerca su molte pagine (/contact, /team, /chi-siamo, ecc.), scopre link automaticamente, preferisce email con nomi (nome.cognome@) rispetto a info@. Opzionale: `GITHUB_TOKEN=xxx` per cercare email da commit GitHub (sviluppatori con email aziendale).
+
+**Nota LinkedIn:** LinkedIn non espone email pubblicamente e vieta lo scraping. Per trovare contatti diretti serve Hunter.io / Apollo (a pagamento).

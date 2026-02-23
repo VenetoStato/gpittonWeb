@@ -7,6 +7,7 @@ Lo scraper visita i siti, cerca email nelle pagine, verifica che siano sul domin
 Output: lista-300-verificate.csv (fino a 300 email verificate trovate sui siti).
 """
 import csv
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -61,8 +62,8 @@ def main():
             "--limit", str(BATCH),
             "--offset", str(offset),
             "--delay", "1.5",
-            "--pages", "4",
-        ], cwd=str(BASE), capture_output=False)
+            "--pages", "10",
+        ], cwd=str(BASE), capture_output=False, env={**os.environ})
         if ret.returncode != 0:
             print("Errore scraper")
             break
