@@ -1,8 +1,8 @@
 // Vercel Serverless - Newsletter massiva
-// Supporta Resend (default), Mailgun, Brevo. Switch: EMAIL_PROVIDER=resend|mailgun|brevo
+// Se BREVO_KEY è impostata → Brevo. Altrimenti Resend/Mailgun.
 // Richiede: Authorization: Bearer NEWSLETTER_AUTH_TOKEN
 
-const EMAIL_PROVIDER = process.env.EMAIL_PROVIDER || 'resend';
+const EMAIL_PROVIDER = process.env.BREVO_KEY ? 'brevo' : (process.env.EMAIL_PROVIDER || 'resend');
 const { sendBrevo } = require('./lib/brevo');
 
 async function sendBatchResend(recipients, subject, htmlContent, textContent) {
@@ -77,8 +77,8 @@ async function sendBatchMailgun(recipients, subject, htmlContent, textContent) {
 
 async function sendBatchBrevo(recipients, subject, htmlContent, textContent) {
   const apiKey = process.env.BREVO_KEY;
-  const senderEmail = process.env.BREVO_SENDER_EMAIL || (process.env.MAILGUN_DOMAIN ? `newsletter@${process.env.MAILGUN_DOMAIN}` : 'newsletter@gpitton.com');
-  const senderName = process.env.BREVO_SENDER_NAME || 'Giovanni Pitton';
+  const senderEmail = 'info@gpitton.com';
+  const senderName = 'Giovanni Pitton';
 
   if (!apiKey) throw new Error('Imposta BREVO_KEY in Vercel');
 

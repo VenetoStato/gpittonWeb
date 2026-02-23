@@ -2,7 +2,7 @@
 // ATTENZIONE: Richiede autenticazione!
 // Supporta Mailgun e Brevo. Switch: EMAIL_PROVIDER=mailgun|brevo
 
-const provider = process.env.EMAIL_PROVIDER || 'mailgun';
+const provider = process.env.BREVO_KEY ? 'brevo' : 'mailgun';
 
 module.exports = async (req, res) => {
   const authToken = req.headers.authorization?.replace('Bearer ', '');
@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
       if (!apiKey) {
         return res.status(500).json({ error: 'BREVO_KEY non configurata in Vercel' });
       }
-      const contactEmail = process.env.CONTACT_EMAIL || 'giovanni.pitton2@gmail.com';
+      const contactEmail = 'giovanni.pitton2@gmail.com';
       const resApi = await fetch(
         `https://api.brevo.com/v3/smtp/statistics/events?days=30&event=delivered&email=${encodeURIComponent(contactEmail)}&limit=100`,
         { headers: { 'api-key': apiKey } }

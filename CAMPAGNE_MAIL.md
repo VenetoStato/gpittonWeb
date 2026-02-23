@@ -21,6 +21,14 @@ Dopo la chiusura dell'account Mailgun, usa **Brevo** (ex Sendinblue):
 
 `POST /api/send-bulk-outreach` body `{ "token": "...", "offset": 0, "limit": 80 }`
 
+- Usa `lista-300-verificate.csv` se esiste, altrimenti `lista-100-verificate.csv`
 - Lingua automatica: .it → italiano, .ch/.no/.com → inglese
 - Batch: `limit: 80` per evitare timeout
-- Supporta `EMAIL_PROVIDER=mailgun` o `EMAIL_PROVIDER=brevo`
+- Solo BREVO_KEY in Vercel (resto hardcoded)
+
+## Ottenere le 300 email verificate
+
+```bash
+python unisci_liste_italiane.py   # crea lista-aziende-it-300.csv
+python run_scraper_300.py        # visita siti, verifica email, output lista-300-verificate.csv
+```

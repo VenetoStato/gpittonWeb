@@ -7,8 +7,8 @@ const path = require('path');
 const { sendBrevo } = require('./lib/brevo');
 
 module.exports = async (req, res) => {
-  const provider = process.env.EMAIL_PROVIDER || 'mailgun';
-  const domain = process.env.MAILGUN_DOMAIN || 'gpitton.com';
+  const provider = process.env.BREVO_KEY ? 'brevo' : 'mailgun';
+  const domain = 'gpitton.com';
   const toEmail = 'giovanni.pitton2@gmail.com';
   const isEN = (req.query?.lang || '').toLowerCase() === 'en';
 
@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
         subject,
         html: htmlContent,
         to: toEmail,
-        senderEmail: process.env.BREVO_SENDER_EMAIL || `info@${domain}`
+        senderEmail: 'info@gpitton.com'
       });
       return res.status(200).json({
         success: true,
