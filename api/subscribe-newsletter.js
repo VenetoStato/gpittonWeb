@@ -7,7 +7,7 @@ const { sendBrevo } = require('./lib/brevo');
 async function sendWithResend(payload) {
   const apiKey = process.env.RESEND_API_KEY;
   const fromEmail = process.env.EMAIL_FROM || 'Newsletter <onboarding@resend.dev>';
-  const toEmail = process.env.NEWSLETTER_EMAIL || process.env.CONTACT_EMAIL || 'giovanni.pitton2@gmail.com';
+  const toEmail = process.env.NEWSLETTER_EMAIL || process.env.CONTACT_EMAIL || process.env.CONTACT_MAIL || 'giovanni.pitton2@gmail.com';
 
   if (!apiKey) {
     throw new Error('Imposta RESEND_API_KEY in Vercel. Vedi SETUP_RESEND.md');
@@ -43,7 +43,7 @@ async function sendWithMailgun(payload) {
   });
 
   const domain = process.env.MAILGUN_DOMAIN;
-  const toEmail = process.env.NEWSLETTER_EMAIL || process.env.CONTACT_EMAIL || 'giovanni.pitton2@gmail.com';
+  const toEmail = process.env.NEWSLETTER_EMAIL || process.env.CONTACT_EMAIL || process.env.CONTACT_MAIL || 'giovanni.pitton2@gmail.com';
 
   if (!process.env.MAILGUN_API_KEY || !domain) {
     throw new Error('Imposta MAILGUN_API_KEY e MAILGUN_DOMAIN per usare Mailgun');
@@ -111,7 +111,7 @@ Sito web di Giovanni Pitton
 
     let result;
     if (EMAIL_PROVIDER === 'mailgun') result = await sendWithMailgun(payload);
-    else if (EMAIL_PROVIDER === 'brevo') result = await sendBrevo({ subject: payload.subject, text: payload.text, html: payload.html, to: process.env.CONTACT_EMAIL || 'giovanni.pitton2@gmail.com' });
+    else if (EMAIL_PROVIDER === 'brevo') result = await sendBrevo({ subject: payload.subject, text: payload.text, html: payload.html, to: process.env.CONTACT_EMAIL || process.env.CONTACT_MAIL || 'giovanni.pitton2@gmail.com' });
     else result = await sendWithResend(payload);
 
     return res.status(200).json({

@@ -77,7 +77,7 @@ async function sendBatchMailgun(recipients, subject, htmlContent, textContent) {
 
 async function sendBatchBrevo(recipients, subject, htmlContent, textContent) {
   const apiKey = process.env.BREVO_KEY;
-  const senderEmail = process.env.BREVO_SENDER_EMAIL || 'info@gpitton.com';
+  const senderEmail = process.env.BREVO_SENDER_EMAIL || process.env.BREVO_SENDER_MAIL || 'info@gpitton.com';
   const senderName = process.env.BREVO_SENDER_NAME || 'Giovanni Pitton';
 
   if (!apiKey) throw new Error('Imposta BREVO_KEY in Vercel');

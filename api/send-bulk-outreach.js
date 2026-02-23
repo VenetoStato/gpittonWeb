@@ -67,7 +67,7 @@ module.exports = async (req, res) => {
     const DELAY_MS = 600;
 
     if (provider === 'brevo') {
-      const senderEmail = process.env.BREVO_SENDER_EMAIL || 'info@gpitton.com';
+      const senderEmail = process.env.BREVO_SENDER_EMAIL || process.env.BREVO_SENDER_MAIL || 'info@gpitton.com';
       for (let i = 0; i < recipients.length; i++) {
         const { azienda, email, sito } = recipients[i];
         const isIT = (sito || '').includes('.it');

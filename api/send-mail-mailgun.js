@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
         subject,
         html: htmlContent,
         to: toEmail,
-        senderEmail: process.env.BREVO_SENDER_EMAIL || 'info@gpitton.com'
+        senderEmail: process.env.BREVO_SENDER_EMAIL || process.env.BREVO_SENDER_MAIL || 'info@gpitton.com'
       });
       return res.status(200).json({
         success: true,

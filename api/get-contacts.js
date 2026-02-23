@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
       if (!apiKey) {
         return res.status(500).json({ error: 'BREVO_KEY non configurata in Vercel' });
       }
-      const contactEmail = process.env.CONTACT_EMAIL || 'giovanni.pitton2@gmail.com';
+      const contactEmail = process.env.CONTACT_EMAIL || process.env.CONTACT_MAIL || 'giovanni.pitton2@gmail.com';
       const resApi = await fetch(
         `https://api.brevo.com/v3/smtp/statistics/events?days=30&event=delivered&email=${encodeURIComponent(contactEmail)}&limit=100`,
         { headers: { 'api-key': apiKey } }
