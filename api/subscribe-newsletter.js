@@ -111,7 +111,7 @@ Sito web di Giovanni Pitton
 
     let result;
     if (EMAIL_PROVIDER === 'mailgun') result = await sendWithMailgun(payload);
-    else if (EMAIL_PROVIDER === 'brevo') result = await sendBrevo({ subject: payload.subject, text: payload.text, html: payload.html, to: 'giovanni.pitton2@gmail.com' });
+    else if (EMAIL_PROVIDER === 'brevo') result = await sendBrevo({ subject: payload.subject, text: payload.text, html: payload.html, to: process.env.CONTACT_EMAIL || 'giovanni.pitton2@gmail.com' });
     else result = await sendWithResend(payload);
 
     return res.status(200).json({

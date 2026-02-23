@@ -33,6 +33,9 @@ module.exports = async (req, res) => {
   const csv300 = path.join(__dirname, '..', 'lista-300-verificate.csv');
   const csv100 = path.join(__dirname, '..', 'lista-100-verificate.csv');
   const csvPath = fs.existsSync(csv300) ? csv300 : csv100;
+  if (!fs.existsSync(csvPath)) {
+    return res.status(400).json({ error: 'Nessuna lista trovata. Esegui run_scraper_300.py o usa lista-100-verificate.csv' });
+  }
 
   const provider = process.env.BREVO_KEY ? 'brevo' : 'mailgun';
   const domain = 'gpitton.com';
@@ -64,7 +67,7 @@ module.exports = async (req, res) => {
     const DELAY_MS = 600;
 
     if (provider === 'brevo') {
-      const senderEmail = 'info@gpitton.com';
+      const senderEmail = process.env.BREVO_SENDER_EMAIL || 'info@gpitton.com';
       for (let i = 0; i < recipients.length; i++) {
         const { azienda, email, sito } = recipients[i];
         const isIT = (sito || '').includes('.it');

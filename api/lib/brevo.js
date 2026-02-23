@@ -1,14 +1,11 @@
 // Helper Brevo (ex Sendinblue) - invio email transazionali
 // API: https://developers.brevo.com/docs/send-a-transactional-email
-// Richiede solo BREVO_KEY (Vercel). Resto hardcoded.
-
-const SENDER_EMAIL = 'info@gpitton.com';
-const SENDER_NAME = 'Giovanni Pitton';
+// Variabili Vercel: BREVO_KEY, BREVO_SENDER_EMAIL, BREVO_SENDER_NAME
 
 async function sendBrevo(payload) {
   const apiKey = process.env.BREVO_KEY;
-  const senderEmail = payload.senderEmail || SENDER_EMAIL;
-  const senderName = payload.senderName || SENDER_NAME;
+  const senderEmail = payload.senderEmail || process.env.BREVO_SENDER_EMAIL || 'info@gpitton.com';
+  const senderName = payload.senderName || process.env.BREVO_SENDER_NAME || 'Giovanni Pitton';
 
   if (!apiKey) {
     throw new Error('Imposta BREVO_KEY in Vercel > Settings > Environment Variables');
