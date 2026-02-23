@@ -11,9 +11,11 @@ async function sendBrevo(payload) {
     throw new Error('Imposta BREVO_KEY in Vercel > Settings > Environment Variables');
   }
 
+  const ensureTo = (t) => (typeof t === 'string' ? { email: t, name: t.split('@')[0] || 'Recipient' } : { ...t, name: t.name || t.email?.split('@')[0] || 'Recipient' });
+  const toList = Array.isArray(payload.to) ? payload.to.map(ensureTo) : [ensureTo(payload.to)];
   const body = {
     sender: { name: payload.senderName || senderName, email: payload.senderEmail || senderEmail },
-    to: Array.isArray(payload.to) ? payload.to : [{ email: payload.to, name: payload.toName || '' }],
+    to: toList,
     subject: payload.subject,
     htmlContent: payload.html,
     textContent: payload.text || (payload.html ? payload.html.replace(/<[^>]*>/g, '') : undefined),
