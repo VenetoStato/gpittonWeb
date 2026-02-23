@@ -1,18 +1,52 @@
-// GET: invia mail outreach via Mailgun a giovanni.pitton2@gmail.com
+// GET: invia mail outreach di test a giovanni.pitton2@gmail.com
 // ?lang=en → mail inglese (CH/NO) | default → mail italiana
-// Usa api.eu.mailgun.net (EU region)
-// Richiede: MAILGUN_API_KEY, MAILGUN_DOMAIN (gpitton.com)
+// Supporta Mailgun e Brevo. Switch: EMAIL_PROVIDER=mailgun|brevo
 
 const fs = require('fs');
 const path = require('path');
+const { sendBrevo } = require('./lib/brevo');
 
 module.exports = async (req, res) => {
-  const apiKey = process.env.MAILGUN_API_KEY;
+  const provider = process.env.EMAIL_PROVIDER || 'mailgun';
   const domain = process.env.MAILGUN_DOMAIN || 'gpitton.com';
   const toEmail = 'giovanni.pitton2@gmail.com';
   const isEN = (req.query?.lang || '').toLowerCase() === 'en';
 
-  if (!apiKey) {
+  const htmlFile = isEN ? 'mail-comunicazione-en.html' : 'mail-comunicazione.html';
+  const htmlPath = path.join(__dirname, '..', htmlFile);
+  const htmlContent = fs.readFileSync(htmlPath, 'utf8');
+  const subject = isEN ? 'Robotics and AI Consulting - Giovanni Pitton' : 'Consulenza Robotica e AI - Giovanni Pitton';
+
+  if (provider === 'brevo') {
+    if (!process.env.BREVO_KEY) {
+      return res.status(500).json({
+        error: 'BREVO_KEY non configurata',
+        hint: 'Aggiungi BREVO_KEY in Vercel > Settings > Environment Variables'
+      });
+    }
+    try {
+      const result = await sendBrevo({
+        subject,
+        html: htmlContent,
+        to: toEmail,
+        senderEmail: process.env.BREVO_SENDER_EMAIL || `info@${domain}`
+      });
+      return res.status(200).json({
+        success: true,
+        id: result.id,
+        message: `Email inviata a ${toEmail} via Brevo`,
+        provider: 'brevo'
+      });
+    } catch (error) {
+      console.error('Brevo error:', error);
+      return res.status(500).json({
+        error: error.message || 'Errore invio Brevo',
+        hint: 'Verifica BREVO_KEY e BREVO_SENDER_EMAIL in Vercel'
+      });
+    }
+  }
+
+  if (!process.env.MAILGUN_API_KEY) {
     return res.status(500).json({
       error: 'MAILGUN_API_KEY non configurata',
       hint: 'Aggiungi MAILGUN_API_KEY in Vercel > Settings > Environment Variables'
@@ -20,17 +54,12 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const htmlFile = isEN ? 'mail-comunicazione-en.html' : 'mail-comunicazione.html';
-    const htmlPath = path.join(__dirname, '..', htmlFile);
-    const htmlContent = fs.readFileSync(htmlPath, 'utf8');
-    const subject = isEN ? 'Robotics and AI Consulting - Giovanni Pitton' : 'Consulenza Robotica e AI - Giovanni Pitton';
-
     const Mailgun = require('mailgun.js');
     const formData = require('form-data');
     const mailgun = new Mailgun(formData);
     const mg = mailgun.client({
       username: 'api',
-      key: apiKey,
+      key: process.env.MAILGUN_API_KEY,
       url: 'https://api.eu.mailgun.net'
     });
 

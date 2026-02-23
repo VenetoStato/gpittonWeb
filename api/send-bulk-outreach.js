@@ -1,18 +1,19 @@
-// POST: invia mail outreach. Body: { list?: 'it'|'ch-no', token?: string, offset?: number, limit?: number }
-// list: 'it' = lista-aziende-100.csv + mail IT | 'ch-no' = lista-aziende-ch-no.csv + mail EN
-// offset/limit: per batch (es. limit=80 evita timeout Vercel ~60s). Se assenti invia tutti.
-// Usa Mailgun (info@gpitton.com)
+// POST: invia mail outreach. Usa SOLO lista-100-verificate.csv (email trovate sui siti)
+// Body: { token?: string, offset?: number, limit?: number }
+// Lingua: .it -> italiano, .ch/.no/.com -> inglese
+// Supporta Mailgun e Brevo. Switch: EMAIL_PROVIDER=mailgun|brevo
 
 const fs = require('fs');
 const path = require('path');
+const { sendBrevo } = require('./lib/brevo');
 
 function parseCSV(content) {
   const lines = content.trim().split('\n');
   const rows = [];
   for (let i = 1; i < lines.length; i++) {
     const parts = lines[i].split(';');
-    if (parts.length >= 2 && parts[1].includes('@')) {
-      rows.push({ azienda: parts[0].trim(), email: parts[1].trim() });
+    if (parts.length >= 2 && parts[1]?.includes('@')) {
+      rows.push({ azienda: (parts[0] || '').trim(), email: (parts[1] || '').trim(), sito: (parts[2] || '').trim() });
     }
   }
   return rows;
@@ -29,17 +30,18 @@ module.exports = async (req, res) => {
     return res.status(401).json({ error: 'Token non valido. Imposta NEWSLETTER_AUTH_TOKEN in Vercel e passa token nel body o header.' });
   }
 
-  const listType = req.body?.list || 'it';
-  const isCHNO = listType === 'ch-no';
-  const csvPath = path.join(__dirname, '..', isCHNO ? 'lista-aziende-ch-no.csv' : 'lista-aziende-100.csv');
-  const htmlPath = path.join(__dirname, '..', isCHNO ? 'mail-comunicazione-en.html' : 'mail-comunicazione.html');
-  const subject = isCHNO ? 'Robotics and AI Consulting - Giovanni Pitton' : 'Consulenza Robotica e AI - Giovanni Pitton';
+  const csvPath = path.join(__dirname, '..', 'lista-100-verificate.csv');
 
-  const apiKey = process.env.MAILGUN_API_KEY;
-  const domain = process.env.MAILGUN_DOMAIN || 'gpitton.com';
+  const provider = process.env.EMAIL_PROVIDER || 'mailgun';
+  const domain = process.env.MAILGUN_DOMAIN || (process.env.BREVO_SENDER_EMAIL ? process.env.BREVO_SENDER_EMAIL.split('@')[1] : null) || 'gpitton.com';
+  const mailgunKey = process.env.MAILGUN_API_KEY;
+  const brevoKey = process.env.BREVO_KEY;
 
-  if (!apiKey) {
+  if (provider === 'mailgun' && !mailgunKey) {
     return res.status(500).json({ error: 'MAILGUN_API_KEY non configurata' });
+  }
+  if (provider === 'brevo' && !brevoKey) {
+    return res.status(500).json({ error: 'BREVO_KEY non configurata in Vercel' });
   }
 
   try {
@@ -55,37 +57,60 @@ module.exports = async (req, res) => {
     } else if (offset > 0) {
       recipients = recipients.slice(offset);
     }
-    const htmlContent = fs.readFileSync(htmlPath, 'utf8');
-    const textContent = htmlContent.replace(/<[^>]*>/g, '');
-
-    const Mailgun = require('mailgun.js');
-    const formData = require('form-data');
-    const mailgun = new Mailgun(formData);
-    const mg = mailgun.client({
-      username: 'api',
-      key: apiKey,
-      url: 'https://api.eu.mailgun.net'
-    });
 
     const results = { sent: 0, failed: [] };
     const DELAY_MS = 600;
 
-    for (let i = 0; i < recipients.length; i++) {
-      const { azienda, email } = recipients[i];
-      try {
-        await mg.messages.create(domain, {
-          from: `Giovanni Pitton <info@${domain}>`,
-          to: email,
-          subject,
-          html: htmlContent,
-          text: textContent
-        });
-        results.sent++;
-      } catch (err) {
-        results.failed.push({ azienda, email, error: err.message || 'Errore' });
+    if (provider === 'brevo') {
+      const senderEmail = process.env.BREVO_SENDER_EMAIL || `info@${domain}`;
+      for (let i = 0; i < recipients.length; i++) {
+        const { azienda, email, sito } = recipients[i];
+        const isIT = (sito || '').includes('.it');
+        const htmlPath = path.join(__dirname, '..', isIT ? 'mail-comunicazione.html' : 'mail-comunicazione-en.html');
+        const subject = isIT ? 'Consulenza Robotica e AI - Giovanni Pitton' : 'Robotics and AI Consulting - Giovanni Pitton';
+        const htmlContent = fs.readFileSync(htmlPath, 'utf8');
+        const textContent = htmlContent.replace(/<[^>]*>/g, '');
+        try {
+          await sendBrevo({ subject, html: htmlContent, text: textContent, to: email, senderEmail });
+          results.sent++;
+        } catch (err) {
+          results.failed.push({ azienda, email, error: err.message || 'Errore' });
+        }
+        if (i < recipients.length - 1) {
+          await new Promise(r => setTimeout(r, DELAY_MS));
+        }
       }
-      if (i < recipients.length - 1) {
-        await new Promise(r => setTimeout(r, DELAY_MS));
+    } else {
+      const Mailgun = require('mailgun.js');
+      const formData = require('form-data');
+      const mailgun = new Mailgun(formData);
+      const mg = mailgun.client({
+        username: 'api',
+        key: mailgunKey,
+        url: 'https://api.eu.mailgun.net'
+      });
+      for (let i = 0; i < recipients.length; i++) {
+        const { azienda, email, sito } = recipients[i];
+        const isIT = (sito || '').includes('.it');
+        const htmlPath = path.join(__dirname, '..', isIT ? 'mail-comunicazione.html' : 'mail-comunicazione-en.html');
+        const subject = isIT ? 'Consulenza Robotica e AI - Giovanni Pitton' : 'Robotics and AI Consulting - Giovanni Pitton';
+        const htmlContent = fs.readFileSync(htmlPath, 'utf8');
+        const textContent = htmlContent.replace(/<[^>]*>/g, '');
+        try {
+          await mg.messages.create(domain, {
+            from: `Giovanni Pitton <info@${domain}>`,
+            to: email,
+            subject,
+            html: htmlContent,
+            text: textContent
+          });
+          results.sent++;
+        } catch (err) {
+          results.failed.push({ azienda, email, error: err.message || 'Errore' });
+        }
+        if (i < recipients.length - 1) {
+          await new Promise(r => setTimeout(r, DELAY_MS));
+        }
       }
     }
 

@@ -1,8 +1,9 @@
 // Vercel Serverless - Newsletter massiva
-// Supporta Resend (default) e Mailgun. Switch: EMAIL_PROVIDER=resend|mailgun
+// Supporta Resend (default), Mailgun, Brevo. Switch: EMAIL_PROVIDER=resend|mailgun|brevo
 // Richiede: Authorization: Bearer NEWSLETTER_AUTH_TOKEN
 
 const EMAIL_PROVIDER = process.env.EMAIL_PROVIDER || 'resend';
+const { sendBrevo } = require('./lib/brevo');
 
 async function sendBatchResend(recipients, subject, htmlContent, textContent) {
   const apiKey = process.env.RESEND_API_KEY;
@@ -74,6 +75,52 @@ async function sendBatchMailgun(recipients, subject, htmlContent, textContent) {
   return results;
 }
 
+async function sendBatchBrevo(recipients, subject, htmlContent, textContent) {
+  const apiKey = process.env.BREVO_KEY;
+  const senderEmail = process.env.BREVO_SENDER_EMAIL || (process.env.MAILGUN_DOMAIN ? `newsletter@${process.env.MAILGUN_DOMAIN}` : 'newsletter@gpitton.com');
+  const senderName = process.env.BREVO_SENDER_NAME || 'Giovanni Pitton';
+
+  if (!apiKey) throw new Error('Imposta BREVO_KEY in Vercel');
+
+  const text = textContent || htmlContent.replace(/<[^>]*>/g, '');
+  const results = [];
+  const BATCH = 100; // Brevo supporta fino a 1000 per messageVersions
+
+  for (let i = 0; i < recipients.length; i += BATCH) {
+    const batch = recipients.slice(i, i + BATCH);
+    const messageVersions = batch.map(email => ({ to: [{ email, name: '' }] }));
+    const body = {
+      sender: { name: senderName, email: senderEmail },
+      subject,
+      htmlContent,
+      textContent: text,
+      messageVersions
+    };
+
+    const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'api-key': apiKey,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+
+    const data = await res.json();
+    results.push({
+      batch: Math.floor(i / BATCH) + 1,
+      count: batch.length,
+      id: data.messageId || data.messageIds,
+      error: res.ok ? null : (data.message || data.code)
+    });
+    if (i + BATCH < recipients.length) {
+      await new Promise(r => setTimeout(r, 500));
+    }
+  }
+  return results;
+}
+
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -94,9 +141,10 @@ module.exports = async (req, res) => {
       return res.status(400).json({ error: 'Subject and htmlContent are required' });
     }
 
-    const results = EMAIL_PROVIDER === 'mailgun'
-      ? await sendBatchMailgun(recipients, subject, htmlContent, textContent)
-      : await sendBatchResend(recipients, subject, htmlContent, textContent);
+    let results;
+    if (EMAIL_PROVIDER === 'mailgun') results = await sendBatchMailgun(recipients, subject, htmlContent, textContent);
+    else if (EMAIL_PROVIDER === 'brevo') results = await sendBatchBrevo(recipients, subject, htmlContent, textContent);
+    else results = await sendBatchResend(recipients, subject, htmlContent, textContent);
 
     return res.status(200).json({
       success: true,

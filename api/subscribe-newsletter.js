@@ -1,7 +1,8 @@
 // Vercel Serverless - Iscrizione newsletter
-// Supporta Resend (default) e Mailgun. Switch: EMAIL_PROVIDER=resend|mailgun
+// Supporta Resend (default), Mailgun, Brevo. Switch: EMAIL_PROVIDER=resend|mailgun|brevo
 
 const EMAIL_PROVIDER = process.env.EMAIL_PROVIDER || 'resend';
+const { sendBrevo } = require('./lib/brevo');
 
 async function sendWithResend(payload) {
   const apiKey = process.env.RESEND_API_KEY;
@@ -108,9 +109,10 @@ Sito web di Giovanni Pitton
       html: htmlBody
     };
 
-    const result = EMAIL_PROVIDER === 'mailgun'
-      ? await sendWithMailgun(payload)
-      : await sendWithResend(payload);
+    let result;
+    if (EMAIL_PROVIDER === 'mailgun') result = await sendWithMailgun(payload);
+    else if (EMAIL_PROVIDER === 'brevo') result = await sendBrevo({ subject: payload.subject, text: payload.text, html: payload.html, to: process.env.NEWSLETTER_EMAIL || process.env.CONTACT_EMAIL || 'giovanni.pitton2@gmail.com' });
+    else result = await sendWithResend(payload);
 
     return res.status(200).json({
       success: true,

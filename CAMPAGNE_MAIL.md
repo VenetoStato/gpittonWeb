@@ -1,39 +1,26 @@
-# Campagne Mail - Tracciamento
+# Campagne Mail
 
-Struttura per gestire e reinviare le diverse tipologie di mail.
+## Lista: solo email verificate
 
----
-
-## Tipologie di mail
-
-| Tipo | Template | Lista | API | Note |
-|------|----------|------|-----|------|
-| **Outreach IT** | `mail-comunicazione.html` | `lista-aziende-100.csv` (110 aziende Veneto/Friuli) | `POST /api/send-bulk-outreach` con `list: "it"` | Subject: "Consulenza Robotica e AI - Giovanni Pitton" |
-| **Outreach CH-NO** | `mail-comunicazione-en.html` | `lista-aziende-ch-no.csv` (~1000 Svizzera/Norvegia) | `POST /api/send-bulk-outreach` con `list: "ch-no"` | Subject: "Robotics and AI Consulting - Giovanni Pitton" |
-| **Newsletter EN** | `newsletter-en.html` | Da definire | `POST /api/send-bulk-newsletter` | Template newsletter (diverso da outreach) |
+**lista-100-verificate.csv** – 104 contatti. Email trovate sui siti aziendali (scraping), dominio verificato.
 
 ---
 
-## Storico invii (da aggiornare manualmente)
+## Provider email: Brevo (alternativa a Mailgun)
 
-| Data | Tipo | Lista | Destinatari | Note |
-|------|------|------|-------------|------|
-| _da compilare_ | Outreach IT | lista-aziende-100.csv | 110 | Veneto/Friuli |
-| _da compilare_ | Outreach CH-NO | lista-aziende-ch-no.csv | ~1000 | Svizzera + Norvegia |
+Dopo la chiusura dell'account Mailgun, usa **Brevo** (ex Sendinblue):
 
----
-
-## Come reinviare
-
-1. **Outreach IT**: `POST https://gpitton.com/api/send-bulk-outreach` con body `{ "list": "it", "token": "<NEWSLETTER_AUTH_TOKEN>" }`
-2. **Outreach CH-NO**: `POST https://gpitton.com/api/send-bulk-outreach` con body `{ "list": "ch-no", "token": "<NEWSLETTER_AUTH_TOKEN>" }`
-3. **Newsletter**: configurare `api/send-bulk-newsletter.js` e lista destinatari
+1. Crea account su [brevo.com](https://www.brevo.com)
+2. Vai in **Account > SMTP & API** e copia l'API key
+3. In Vercel: `EMAIL_PROVIDER=brevo`, `BREVO_KEY=xxx`, `BREVO_SENDER_EMAIL=info@gpitton.com`
+4. Verifica il dominio mittente in Brevo (Sender & IP)
 
 ---
 
-## File correlati
+## Invio
 
-- **Template mail**: `mail-comunicazione.html`, `mail-comunicazione-en.html`, `newsletter-en.html`
-- **Liste**: `lista-aziende-100.csv`, `lista-aziende-ch-no.csv`
-- **API**: `api/send-bulk-outreach.js`, `api/send-bulk-newsletter.js`
-- **Lista contatti visibile**: `list-contatti.html`
+`POST /api/send-bulk-outreach` body `{ "token": "...", "offset": 0, "limit": 80 }`
+
+- Lingua automatica: .it → italiano, .ch/.no/.com → inglese
+- Batch: `limit: 80` per evitare timeout
+- Supporta `EMAIL_PROVIDER=mailgun` o `EMAIL_PROVIDER=brevo`

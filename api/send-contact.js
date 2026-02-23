@@ -1,7 +1,8 @@
 // Vercel Serverless - Form contatti
-// Supporta Resend (default) e Mailgun. Switch: EMAIL_PROVIDER=resend|mailgun
+// Supporta Resend (default), Mailgun, Brevo. Switch: EMAIL_PROVIDER=resend|mailgun|brevo
 
 const EMAIL_PROVIDER = process.env.EMAIL_PROVIDER || 'resend';
+const { sendBrevo } = require('./lib/brevo');
 
 // --- Helper: invio con Resend ---
 async function sendWithResend(payload) {
@@ -127,9 +128,10 @@ Inviato dal modulo contatti del sito web.
       replyTo: email
     };
 
-    const result = EMAIL_PROVIDER === 'mailgun'
-      ? await sendWithMailgun(payload)
-      : await sendWithResend(payload);
+    let result;
+    if (EMAIL_PROVIDER === 'mailgun') result = await sendWithMailgun(payload);
+    else if (EMAIL_PROVIDER === 'brevo') result = await sendBrevo({ subject: payload.subject, text: payload.text, html: payload.html, to: process.env.CONTACT_EMAIL || 'giovanni.pitton2@gmail.com', replyTo: payload.replyTo });
+    else result = await sendWithResend(payload);
 
     return res.status(200).json({
       success: true,
