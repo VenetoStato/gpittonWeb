@@ -1,0 +1,8 @@
+{
+  "appId": "com.venetostato.castellimentali",
+  "appName": "Castelli mentali",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false
+  }
+}

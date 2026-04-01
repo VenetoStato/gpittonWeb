@@ -1,0 +1,4 @@
+# Copia come local.properties e imposta il percorso del tuo Android SDK.
+# Esempio Linux: sdk.dir=/home/utente/Android/Sdk
+# Oppure export ANDROID_HOME=... prima di ./gradlew
+sdk.dir=/percorso/al/tuo/Android/Sdk

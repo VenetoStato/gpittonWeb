@@ -1,0 +1,21 @@
+{
+  "name": "castelli-mentali-apk",
+  "version": "1.0.0",
+  "description": "App Android (APK) sui castelli mentali — Capacitor",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "sync": "npx cap sync android",
+    "open:android": "npx cap open android",
+    "build:apk": "cd android && ./gradlew assembleDebug",
+    "deploy:apk": "npm run sync && npm run build:apk"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor/android": "^6.2.1",
+    "@capacitor/cli": "^6.2.1",
+    "@capacitor/core": "^6.2.1"
+  }
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1a1a2e" />
+  <title>Castelli mentali</title>
+  <style>
+    :root {
+      --bg: #1a1a2e;
+      --card: #16213e;
+      --accent: #e94560;
+      --text: #eaeaea;
+      --muted: #a0a0b0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(160deg, var(--bg) 0%, #0f3460 100%);
+      color: var(--text);
+      line-height: 1.55;
+      padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1.5rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+    }
+    header {
+      text-align: center;
+      margin-bottom: 1.75rem;
+    }
+    h1 {
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      font-weight: 700;
+      margin: 0 0 0.35rem;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+    main {
+      max-width: 36rem;
+      margin: 0 auto;
+    }
+    section {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 1.15rem 1.25rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    }
+    h2 {
+      font-size: 1.05rem;
+      margin: 0 0 0.65rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    p { margin: 0 0 0.75rem; }
+    p:last-child { margin-bottom: 0; }
+    ol, ul { margin: 0 0 0.5rem; padding-left: 1.25rem; }
+    li { margin-bottom: 0.35rem; }
+    footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Castelli mentali</h1>
+    <p class="subtitle">Tecnica di memoria: luoghi familiari per ricordare informazioni in ordine.</p>
+  </header>
+  <main>
+    <section>
+      <h2>Cos’è</h2>
+      <p>Il metodo dei castelli mentali (o palazzo della memoria) associa ogni elemento da ricordare a un punto preciso di un percorso che conosci bene: la tua casa, il tragitto al lavoro, un museo. Ripassi mentalmente il percorso e richiami le immagini.</p>
+    </section>
+    <section>
+      <h2>Come usarlo</h2>
+      <ol>
+        <li>Scegli un luogo con molti punti distinti (stanze, angoli, mobili).</li>
+        <li>Definisci un ordine fisso lungo il percorso.</li>
+        <li>Per ogni informazione, crea un’immagine vivida e strana sul punto corrispondente.</li>
+        <li>Ripeti il percorso finché le associazioni diventano automatiche.</li>
+      </ol>
+    </section>
+    <section>
+      <h2>Suggerimenti</h2>
+      <ul>
+        <li>Più l’immagine è esagerata o emotiva, più resta impressa.</li>
+        <li>Usa pochi punti per lista corta; aggiungi stanze se serve più capacità.</li>
+        <li>Puoi avere più “palazzi” per argomenti diversi.</li>
+      </ul>
+    </section>
+  </main>
+  <footer>App offline · Castelli mentali</footer>
+</body>
+</html>

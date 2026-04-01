@@ -12,6 +12,12 @@ Thumbs.db
 *.swo
 *~
 
+# Android SDK (local / CI bootstrap — never commit)
+.android-sdk/
+
+# Android (Capacitor) — per-machine SDK path
+castelli-mentali-apk/android/local.properties
+
 # Dependencies
 node_modules/
 
