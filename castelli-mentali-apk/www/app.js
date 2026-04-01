@@ -1,7 +1,8 @@
 (function () {
   "use strict";
 
-  const STORAGE_KEY = "castelliMentali_v1";
+  const STORAGE_KEY = "castelliMentali_v2";
+  const LEGACY_KEY = "castelliMentali_v1";
 
   /** @typedef {{ id: string, label: string, memo: string }} Locus */
   /** @typedef {{ id: string, name: string, loci: Locus[] }} Palace */
@@ -9,21 +10,69 @@
   /** @type {{ palaces: Palace[], currentId: string | null }} */
   let state = { palaces: [], currentId: null };
 
+  /** @type {{ hideMemo: boolean, revealed: boolean }} */
+  let reviewUi = { hideMemo: true, revealed: false };
+
+  const PRESETS = {
+    time: {
+      name: "Demo: tempo, focus e benessere",
+      loci: [
+        { label: "1. Soglia (apri l’app)", memo: "3 respiri lenti: «Questa sessione ha uno scopo, non è scroll»." },
+        { label: "2. Punto di lavoro", memo: "Scelgo 1 azione concreta per la prossima ora (anche piccola)." },
+        { label: "3. Finestra / luce", memo: "Dopo il ripasso: 2 minuti senza notifiche — micro-pausa consapevole." },
+        { label: "4. Angolo relax", memo: "Una cosa utile già fatta oggi (anche minima): la noto e chiudo il cerchio." },
+        { label: "5. Cucina / acqua", memo: "Un bicchiere d’acqua = gesto di cura fisica tra una schermata e l’altra." },
+        { label: "6. Porta d’uscita", memo: "Chiudo l’app con un «fatto»: ho allenato la memoria, non ho solo consumato contenuti." },
+      ],
+    },
+    study: {
+      name: "Demo: studio e abitudini collaudate",
+      loci: [
+        { label: "1. Libreria", memo: "Ripetizione attiva: chiudo gli appunti e richiamo a voce 3 concetti chiave." },
+        { label: "2. Tavolo", memo: "Spaced repetition: ripasso oggi → tra 2 giorni → tra 1 settimana (calendario)." },
+        { label: "3. Letto (sera)", memo: "Sonno prima dell’esame: la memoria consolida durante il riposo, non solo la notte prima." },
+        { label: "4. Quaderno", memo: "Pratica di recupero: domande difficili a me stesso invece di rileggere passivamente." },
+        { label: "5. Orologio", memo: "Sessioni brevi (es. 25+5): meno fatica, più attenzione sostenuta nel tempo." },
+        { label: "6. Posto d’esame", memo: "Se possibile, allenarsi nello stesso tipo di contesto in cui sarò valutato." },
+      ],
+    },
+    champions: {
+      name: "Demo: come i campioni di memoria",
+      loci: [
+        { label: "1. Partenza del percorso", memo: "Ordine sempre uguale: gli atleti della memoria non improvvisano il tracciato." },
+        { label: "2. Prima tappa", memo: "Immagine esagerata: dimensioni enormi, colori forti, movimento — resta impressa." },
+        { label: "3. Seconda tappa", memo: "Multisensoriale: aggiungo suono, tatto o odore all’immagine (anche inventati)." },
+        { label: "4. Punto centrale", memo: "Primo ripasso subito dopo aver creato le immagini: fissa il percorso." },
+        { label: "5. Penultima tappa", memo: "Allenamento breve ma spesso: meglio 5 minuti ripetuti che un’ora ogni tanto." },
+        { label: "6. Arrivo", memo: "Un palazzo per argomento: non mischio lista spesa ed esame nello stesso percorso." },
+      ],
+    },
+  };
+
   function uid() {
     return Math.random().toString(36).slice(2, 11) + Date.now().toString(36);
   }
 
+  function parseStored(raw) {
+    const p = JSON.parse(raw);
+    if (!p || !Array.isArray(p.palaces)) return null;
+    return {
+      palaces: p.palaces.map(normalizePalace),
+      currentId: p.currentId && p.palaces.some((x) => x.id === p.currentId) ? p.currentId : (p.palaces[0]?.id ?? null),
+    };
+  }
+
   function load() {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        const p = JSON.parse(raw);
-        if (p && Array.isArray(p.palaces)) {
-          state = {
-            palaces: p.palaces.map(normalizePalace),
-            currentId: p.currentId && p.palaces.some((x) => x.id === p.currentId) ? p.currentId : (p.palaces[0]?.id ?? null),
-          };
-          return;
+      for (const key of [STORAGE_KEY, LEGACY_KEY]) {
+        const raw = localStorage.getItem(key);
+        if (raw) {
+          const parsed = parseStored(raw);
+          if (parsed) {
+            state = parsed;
+            if (key === LEGACY_KEY) save();
+            return;
+          }
         }
       }
     } catch (_) {}
@@ -49,18 +98,35 @@
   }
 
   function save() {
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({ palaces: state.palaces, currentId: state.currentId })
-    );
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ palaces: state.palaces, currentId: state.currentId }));
+    try {
+      localStorage.removeItem(LEGACY_KEY);
+    } catch (_) {}
   }
 
   function currentPalace() {
     return state.palaces.find((p) => p.id === state.currentId) ?? null;
   }
 
-  // —— DOM ——
+  function clonePreset(key) {
+    const src = PRESETS[key];
+    if (!src) return null;
+    return {
+      id: uid(),
+      name: src.name,
+      loci: src.loci.map((l) => ({ id: uid(), label: l.label, memo: l.memo })),
+    };
+  }
+
   const el = {
+    tabHome: document.getElementById("tabHome"),
+    tabEdit: document.getElementById("tabEdit"),
+    tabReview: document.getElementById("tabReview"),
+    tabScience: document.getElementById("tabScience"),
+    panelHome: document.getElementById("panelHome"),
+    panelEdit: document.getElementById("panelEdit"),
+    panelReview: document.getElementById("panelReview"),
+    panelScience: document.getElementById("panelScience"),
     palaceSelect: document.getElementById("palaceSelect"),
     btnNewPalace: document.getElementById("btnNewPalace"),
     btnDeletePalace: document.getElementById("btnDeletePalace"),
@@ -68,20 +134,18 @@
     lociList: document.getElementById("lociList"),
     btnAddLocus: document.getElementById("btnAddLocus"),
     btnTemplate10: document.getElementById("btnTemplate10"),
-    tabEdit: document.getElementById("tabEdit"),
-    tabReview: document.getElementById("tabReview"),
-    panelEdit: document.getElementById("panelEdit"),
-    panelReview: document.getElementById("panelReview"),
     reviewProgress: document.getElementById("reviewProgress"),
     reviewLabel: document.getElementById("reviewLabel"),
     reviewMemo: document.getElementById("reviewMemo"),
+    btnReveal: document.getElementById("btnReveal"),
+    chkHideMemo: document.getElementById("chkHideMemo"),
     btnPrev: document.getElementById("btnPrev"),
     btnNext: document.getElementById("btnNext"),
     btnRestart: document.getElementById("btnRestart"),
     exportBtn: document.getElementById("exportBtn"),
     importFile: document.getElementById("importFile"),
-    helpToggle: document.getElementById("helpToggle"),
-    helpPanel: document.getElementById("helpPanel"),
+    sciToggleWhy: document.getElementById("sciToggleWhy"),
+    sciPanelWhy: document.getElementById("sciPanelWhy"),
   };
 
   let reviewIndex = 0;
@@ -103,12 +167,12 @@
     el.lociList.innerHTML = "";
     const p = currentPalace();
     if (!p) {
-      el.lociList.innerHTML = '<p class="empty-hint">Crea un palazzo per aggiungere i punti del percorso.</p>';
+      el.lociList.innerHTML = '<p class="empty-hint">Crea un palazzo dalla scheda Percorso (demo) o con «Nuovo palazzo».</p>';
       return;
     }
     if (p.loci.length === 0) {
       el.lociList.innerHTML =
-        '<p class="empty-hint">Aggiungi i <strong>loci</strong>: ogni riga è un punto fisso in ordine (es. ingresso, corridoio, cucina…). Poi scrivi cosa vuoi ricordare lì.</p>';
+        '<p class="empty-hint">Aggiungi i <strong>loci</strong> in ordine: luogo fisso del percorso, poi l’associazione vivida da ricordare.</p>';
       return;
     }
     p.loci.forEach((loc, i) => {
@@ -119,14 +183,14 @@
         <div class="locus-num">${i + 1}</div>
         <div class="locus-fields">
           <label class="sr-only" for="lab-${loc.id}">Luogo / punto</label>
-          <input type="text" id="lab-${loc.id}" class="input locus-label" placeholder="Es. Ingresso — armadio scarpe" value="${escapeAttr(loc.label)}" />
+          <input type="text" id="lab-${loc.id}" class="input locus-label" placeholder="Es. Ingresso — armadio" value="${escapeAttr(loc.label)}" />
           <label class="sr-only" for="mem-${loc.id}">Da ricordare</label>
-          <input type="text" id="mem-${loc.id}" class="input locus-memo" placeholder="Immagine o parola da associare (es. melone gigante)" value="${escapeAttr(loc.memo)}" />
+          <input type="text" id="mem-${loc.id}" class="input locus-memo" placeholder="Immagine o promemoria vivido" value="${escapeAttr(loc.memo)}" />
         </div>
         <div class="locus-actions">
-          <button type="button" class="btn-icon" data-act="up" title="Sposta su" aria-label="Sposta su">↑</button>
-          <button type="button" class="btn-icon" data-act="down" title="Sposta giù" aria-label="Sposta giù">↓</button>
-          <button type="button" class="btn-icon danger" data-act="del" title="Elimina punto" aria-label="Elimina">×</button>
+          <button type="button" class="btn-icon" data-act="up" title="Su" aria-label="Sposta su">↑</button>
+          <button type="button" class="btn-icon" data-act="down" title="Giù" aria-label="Sposta giù">↓</button>
+          <button type="button" class="btn-icon danger" data-act="del" title="Elimina" aria-label="Elimina">×</button>
         </div>
       `;
       el.lociList.appendChild(row);
@@ -202,21 +266,50 @@
     else if (reviewIndex >= n) reviewIndex = n - 1;
   }
 
+  function applyReviewMemoVisibility() {
+    const p = currentPalace();
+    const loc = p?.loci[reviewIndex];
+    const hasMemo = !!(loc && String(loc.memo).trim());
+    const hide = el.chkHideMemo.checked && hasMemo;
+
+    reviewUi.hideMemo = hide;
+    reviewUi.revealed = !hide;
+
+    if (!loc) {
+      el.reviewMemo.textContent = "";
+      el.reviewMemo.classList.remove("hidden-memo");
+      el.btnReveal.hidden = true;
+      return;
+    }
+
+    if (hide) {
+      el.reviewMemo.textContent = "Prova a ricordare l’associazione, poi tocca «Mostra risposta».";
+      el.reviewMemo.classList.add("hidden-memo");
+      el.btnReveal.hidden = false;
+    } else {
+      el.reviewMemo.textContent = loc.memo.trim() || "— nessuna nota —";
+      el.reviewMemo.classList.remove("hidden-memo");
+      el.btnReveal.hidden = true;
+    }
+  }
+
   function renderReview() {
     const p = currentPalace();
     if (!p || p.loci.length === 0) {
       el.reviewProgress.textContent = "";
-      el.reviewLabel.textContent = "Nessun punto nel palazzo";
-      el.reviewMemo.textContent = "Aggiungi almeno un locus nella scheda Costruisci.";
+      el.reviewLabel.textContent = "Nessun percorso attivo";
+      el.reviewMemo.textContent = "Scegli un palazzo o aggiungi un percorso demo dalla scheda Percorso.";
+      el.reviewMemo.classList.remove("hidden-memo");
+      el.btnReveal.hidden = true;
       el.btnPrev.disabled = true;
       el.btnNext.disabled = true;
       return;
     }
     clampReviewIndex();
     const loc = p.loci[reviewIndex];
-    el.reviewProgress.textContent = `Passo ${reviewIndex + 1} di ${p.loci.length}`;
+    el.reviewProgress.textContent = `Passo ${reviewIndex + 1} / ${p.loci.length}`;
     el.reviewLabel.textContent = loc.label || "(punto senza nome)";
-    el.reviewMemo.textContent = loc.memo || "— nessuna associazione —";
+    applyReviewMemoVisibility();
     el.btnPrev.disabled = reviewIndex === 0;
     el.btnNext.disabled = reviewIndex >= p.loci.length - 1;
   }
@@ -233,6 +326,27 @@
     renderReview();
   }
 
+  function setNavTab(which) {
+    const tabs = [
+      { id: "home", tab: el.tabHome, panel: el.panelHome },
+      { id: "edit", tab: el.tabEdit, panel: el.panelEdit },
+      { id: "review", tab: el.tabReview, panel: el.panelReview },
+      { id: "science", tab: el.tabScience, panel: el.panelScience },
+    ];
+    tabs.forEach((t) => {
+      const on = t.id === which;
+      t.tab.classList.toggle("active", on);
+      t.tab.setAttribute("aria-selected", on ? "true" : "false");
+      t.panel.hidden = !on;
+    });
+    if (which === "review") renderReview();
+  }
+
+  el.tabHome.addEventListener("click", () => setNavTab("home"));
+  el.tabEdit.addEventListener("click", () => setNavTab("edit"));
+  el.tabReview.addEventListener("click", () => setNavTab("review"));
+  el.tabScience.addEventListener("click", () => setNavTab("science"));
+
   el.palaceSelect.addEventListener("change", () => {
     state.currentId = el.palaceSelect.value || null;
     reviewIndex = 0;
@@ -243,7 +357,7 @@
   });
 
   el.btnNewPalace.addEventListener("click", () => {
-    const name = prompt("Nome del nuovo palazzo (es. Casa mia, Ufficio):", "Il mio palazzo");
+    const name = prompt("Nome del nuovo palazzo:", "Il mio palazzo");
     if (name === null) return;
     const p = { id: uid(), name: name.trim() || "Nuovo palazzo", loci: [] };
     state.palaces.push(p);
@@ -251,12 +365,13 @@
     reviewIndex = 0;
     save();
     fullRender();
+    setNavTab("edit");
   });
 
   el.btnDeletePalace.addEventListener("click", () => {
     const p = currentPalace();
     if (!p) return;
-    if (!confirm(`Eliminare il palazzo «${p.name}» e tutti i suoi punti?`)) return;
+    if (!confirm(`Eliminare «${p.name}» e tutti i suoi punti?`)) return;
     state.palaces = state.palaces.filter((x) => x.id !== p.id);
     state.currentId = state.palaces[0]?.id ?? null;
     reviewIndex = 0;
@@ -275,7 +390,7 @@
   el.btnAddLocus.addEventListener("click", () => {
     const p = currentPalace();
     if (!p) {
-      alert("Prima crea un palazzo dal pulsante «Nuovo palazzo».");
+      alert("Crea prima un palazzo (Percorso → demo, o «Nuovo palazzo»).");
       return;
     }
     p.loci.push({ id: uid(), label: "", memo: "" });
@@ -286,10 +401,10 @@
   el.btnTemplate10.addEventListener("click", () => {
     const p = currentPalace();
     if (!p) {
-      alert("Prima crea un palazzo.");
+      alert("Crea prima un palazzo.");
       return;
     }
-    if (p.loci.length > 0 && !confirm("Aggiungere 10 punti numerati in coda? (non cancella quelli esistenti)")) return;
+    if (p.loci.length > 0 && !confirm("Aggiungere 10 punti numerati in coda?")) return;
     for (let i = 1; i <= 10; i++) {
       p.loci.push({ id: uid(), label: `Punto ${p.loci.length + 1}`, memo: "" });
     }
@@ -317,17 +432,33 @@
     renderReview();
   });
 
-  function setTab(which) {
-    const edit = which === "edit";
-    el.tabEdit.classList.toggle("active", edit);
-    el.tabReview.classList.toggle("active", !edit);
-    el.panelEdit.hidden = !edit;
-    el.panelReview.hidden = edit;
-    if (!edit) renderReview();
-  }
+  el.btnReveal.addEventListener("click", () => {
+    const p = currentPalace();
+    const loc = p?.loci[reviewIndex];
+    if (!loc) return;
+    el.reviewMemo.textContent = loc.memo.trim() || "— nessuna nota —";
+    el.reviewMemo.classList.remove("hidden-memo");
+    el.btnReveal.hidden = true;
+    reviewUi.revealed = true;
+  });
 
-  el.tabEdit.addEventListener("click", () => setTab("edit"));
-  el.tabReview.addEventListener("click", () => setTab("review"));
+  el.chkHideMemo.addEventListener("change", () => {
+    renderReview();
+  });
+
+  document.querySelectorAll(".preset-btn[data-preset]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const key = btn.getAttribute("data-preset");
+      const palace = clonePreset(key);
+      if (!palace) return;
+      state.palaces.push(palace);
+      state.currentId = palace.id;
+      reviewIndex = 0;
+      save();
+      fullRender();
+      setNavTab("review");
+    });
+  });
 
   el.exportBtn.addEventListener("click", () => {
     const blob = new Blob([JSON.stringify({ palaces: state.palaces, currentId: state.currentId }, null, 2)], {
@@ -364,27 +495,22 @@
     r.readAsText(f);
   });
 
-  el.helpToggle.addEventListener("click", () => {
-    const open = el.helpPanel.hidden;
-    el.helpPanel.hidden = !open;
-    el.helpToggle.setAttribute("aria-expanded", open ? "true" : "false");
+  el.sciToggleWhy.addEventListener("click", () => {
+    const open = el.sciPanelWhy.hidden;
+    el.sciPanelWhy.hidden = !open;
+    el.sciToggleWhy.setAttribute("aria-expanded", open ? "true" : "false");
   });
 
   load();
   if (state.palaces.length === 0) {
-    const demo = {
-      id: uid(),
-      name: "Esempio: mini percorso",
-      loci: [
-        { id: uid(), label: "1. Ingresso", memo: "Immagine: campanello che suona da solo" },
-        { id: uid(), label: "2. Corridoio", memo: "Lista spesa: pane" },
-        { id: uid(), label: "3. Cucina — frigo", memo: "Lista spesa: latte" },
-      ],
-    };
-    state.palaces.push(demo);
-    state.currentId = demo.id;
-    save();
+    const pTime = clonePreset("time");
+    if (pTime) {
+      state.palaces.push(pTime);
+      state.currentId = pTime.id;
+      save();
+    }
   }
+
   fullRender();
-  setTab("edit");
+  setNavTab("home");
 })();

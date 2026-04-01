@@ -3,27 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#1a1a2e" />
+  <meta name="theme-color" content="#FAF8F5" />
   <title>Castelli mentali</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,550;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #1a1a2e;
-      --card: #16213e;
-      --accent: #e94560;
-      --accent-dim: #c73e54;
-      --text: #eaeaea;
-      --muted: #a0a0b0;
-      --ok: #4ecca3;
+      --bg: #FAF8F5;
+      --bg-elevated: #FFFFFF;
+      --bg-muted: #F3F0EA;
+      --border: #E8E4DC;
+      --border-strong: #D4CFC3;
+      --text: #1F1F1F;
+      --text-secondary: #5C5C5C;
+      --text-tertiary: #8A8680;
+      --accent: #C15F3C;
+      --accent-soft: rgba(193, 95, 60, 0.12);
+      --accent-hover: #A84E32;
+      --link: #2D6A8F;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 1px 2px rgba(31, 31, 31, 0.04), 0 4px 16px rgba(31, 31, 31, 0.06);
+      --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+      --font-sans: "Inter", system-ui, -apple-system, sans-serif;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
       min-height: 100dvh;
-      font-family: system-ui, "Segoe UI", Roboto, sans-serif;
-      background: linear-gradient(160deg, var(--bg) 0%, #0f3460 100%);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      background: var(--bg);
       color: var(--text);
-      line-height: 1.5;
-      padding: max(0.75rem, env(safe-area-inset-top)) max(0.85rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(0.85rem, env(safe-area-inset-left));
+      line-height: 1.55;
+      padding: max(0.65rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1.25rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+      -webkit-font-smoothing: antialiased;
     }
     .sr-only {
       position: absolute;
@@ -35,38 +50,167 @@
       clip: rect(0, 0, 0, 0);
       border: 0;
     }
-    header {
+    header.app-header {
       text-align: center;
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
+      padding-top: 0.35rem;
+    }
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.65rem;
     }
     h1 {
-      font-size: clamp(1.35rem, 4.5vw, 1.85rem);
-      font-weight: 700;
-      margin: 0 0 0.25rem;
+      font-family: var(--font-serif);
+      font-size: clamp(1.65rem, 5vw, 2rem);
+      font-weight: 600;
+      margin: 0 0 0.4rem;
       letter-spacing: -0.02em;
+      color: var(--text);
+      line-height: 1.2;
     }
     .subtitle {
-      color: var(--muted);
-      font-size: 0.88rem;
-      margin: 0;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      margin: 0 auto;
       max-width: 22rem;
-      margin-left: auto;
-      margin-right: auto;
+      font-weight: 400;
     }
-    main { max-width: 26rem; margin: 0 auto; }
-    section, .card {
-      background: var(--card);
-      border-radius: 14px;
-      padding: 1rem 1.1rem;
-      margin-bottom: 0.75rem;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+    main { max-width: 28rem; margin: 0 auto; }
+
+    .nav-tabs {
+      display: flex;
+      gap: 4px;
+      padding: 4px;
+      background: var(--bg-muted);
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
     }
-    h2 {
-      font-size: 0.95rem;
-      margin: 0 0 0.6rem;
-      color: var(--accent);
+    .nav-tab {
+      flex: 1;
+      min-width: 0;
+      padding: 0.5rem 0.35rem;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
       font-weight: 600;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
     }
+    @media (min-width: 380px) {
+      .nav-tab { font-size: 0.8rem; padding: 0.55rem 0.5rem; }
+    }
+    .nav-tab.active {
+      background: var(--bg-elevated);
+      color: var(--text);
+      box-shadow: var(--shadow);
+    }
+
+    .card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.15rem;
+      margin-bottom: 0.85rem;
+      box-shadow: var(--shadow);
+    }
+    .card h2 {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 0 0 0.55rem;
+      color: var(--text);
+    }
+    .card .lede {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin: 0 0 0.75rem;
+      line-height: 1.5;
+    }
+
+    .steps {
+      margin: 0;
+      padding-left: 1.15rem;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+    .steps li { margin-bottom: 0.45rem; }
+    .steps strong { color: var(--text); font-weight: 600; }
+
+    .preset-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .preset-btn {
+      text-align: left;
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg);
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .preset-btn:hover {
+      border-color: var(--border-strong);
+      background: var(--bg-muted);
+    }
+    .preset-btn .ptitle {
+      display: block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+    .preset-btn .pdesc {
+      font-size: 0.78rem;
+      color: var(--text-tertiary);
+      line-height: 1.4;
+    }
+
+    .disclosure {
+      width: 100%;
+      text-align: left;
+      padding: 0.75rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+    }
+    .disclosure:last-of-type { margin-bottom: 0; }
+    .disclosure-panel {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      padding: 0 0.25rem 0.75rem;
+      margin-top: -0.25rem;
+    }
+    .disclosure-panel p { margin: 0 0 0.65rem; }
+    .disclosure-panel p:last-child { margin-bottom: 0; }
+    .disclosure-panel ul { margin: 0.35rem 0 0; padding-left: 1.1rem; }
+    .disclosure-panel li { margin-bottom: 0.35rem; }
+
     .toolbar {
       display: flex;
       flex-wrap: wrap;
@@ -74,85 +218,90 @@
       align-items: center;
       margin-bottom: 0.65rem;
     }
-    .toolbar label { font-size: 0.8rem; color: var(--muted); margin-right: 0.25rem; }
+    .toolbar label { font-size: 0.78rem; color: var(--text-tertiary); font-weight: 500; }
     select.input {
       flex: 1;
       min-width: 8rem;
       padding: 0.55rem 0.65rem;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.25);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg);
       color: var(--text);
-      font-size: 0.95rem;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
     }
     .btn {
       appearance: none;
       border: none;
-      border-radius: 10px;
-      padding: 0.55rem 0.85rem;
-      font-size: 0.9rem;
+      border-radius: var(--radius-sm);
+      padding: 0.55rem 0.9rem;
+      font-size: 0.88rem;
       font-weight: 600;
+      font-family: var(--font-sans);
       cursor: pointer;
       background: var(--accent);
       color: #fff;
+      transition: background 0.15s;
     }
+    .btn:hover { background: var(--accent-hover); }
     .btn:active { transform: scale(0.98); }
-    .btn.secondary { background: rgba(255,255,255,0.12); color: var(--text); }
-    .btn.small { padding: 0.4rem 0.65rem; font-size: 0.82rem; }
+    .btn.secondary {
+      background: var(--bg-muted);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn.secondary:hover { background: var(--border); }
+    .btn.small { padding: 0.42rem 0.7rem; font-size: 0.8rem; }
     .btn:disabled { opacity: 0.45; cursor: not-allowed; }
-    .btn-row { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 0.45rem; align-items: center; }
     .input {
       width: 100%;
-      padding: 0.55rem 0.65rem;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.2);
+      padding: 0.55rem 0.7rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg);
       color: var(--text);
-      font-size: 0.95rem;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
       margin-top: 0.35rem;
     }
-    .field-label { font-size: 0.78rem; color: var(--muted); display: block; margin-top: 0.5rem; }
-    .tabs {
-      display: flex;
-      gap: 0.35rem;
-      margin-bottom: 0.65rem;
+    .input:focus, select.input:focus {
+      outline: 2px solid var(--accent-soft);
+      outline-offset: 1px;
+      border-color: var(--accent);
     }
-    .tab {
-      flex: 1;
-      padding: 0.55rem;
-      border: none;
-      border-radius: 10px;
-      background: rgba(255,255,255,0.08);
-      color: var(--muted);
+    .field-label {
+      font-size: 0.72rem;
       font-weight: 600;
-      font-size: 0.88rem;
-      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-tertiary);
+      display: block;
+      margin-top: 0.55rem;
     }
-    .tab.active {
-      background: var(--accent);
-      color: #fff;
-    }
+
     .locus-row {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.55rem;
       align-items: flex-start;
-      padding: 0.65rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border);
     }
     .locus-row:last-child { border-bottom: none; }
     .locus-num {
       flex-shrink: 0;
-      width: 1.75rem;
-      height: 1.75rem;
-      border-radius: 8px;
-      background: rgba(233, 69, 96, 0.25);
+      width: 1.85rem;
+      height: 1.85rem;
+      border-radius: var(--radius-sm);
+      background: var(--accent-soft);
       color: var(--accent);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 0.85rem;
-      margin-top: 0.15rem;
+      font-size: 0.8rem;
+      margin-top: 0.12rem;
+      font-family: var(--font-sans);
     }
     .locus-fields { flex: 1; min-width: 0; }
     .locus-fields .input { margin-top: 0.35rem; }
@@ -166,61 +315,124 @@
     .btn-icon {
       width: 2rem;
       height: 2rem;
-      border: none;
-      border-radius: 8px;
-      background: rgba(255,255,255,0.1);
-      color: var(--text);
-      font-size: 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      font-size: 0.95rem;
       line-height: 1;
       cursor: pointer;
       padding: 0;
     }
-    .btn-icon.danger { color: var(--accent); }
+    .btn-icon.danger { color: var(--accent); border-color: rgba(193, 95, 60, 0.35); }
+
     .review-box {
-      min-height: 8rem;
-      padding: 1rem;
-      border-radius: 12px;
-      background: rgba(0,0,0,0.25);
-      margin-bottom: 0.75rem;
+      min-height: 9rem;
+      padding: 1.1rem;
+      border-radius: var(--radius-sm);
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
+      margin-bottom: 0.85rem;
     }
-    .review-progress { font-size: 0.78rem; color: var(--ok); margin-bottom: 0.5rem; }
-    .review-label { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem; }
-    .review-memo { font-size: 1rem; color: var(--muted); }
-    .empty-hint { color: var(--muted); font-size: 0.9rem; margin: 0; }
-    .help-btn {
-      width: 100%;
-      text-align: left;
-      padding: 0.65rem 0.85rem;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 10px;
-      background: transparent;
+    .review-progress {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 0.55rem;
+    }
+    .review-label {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.85rem;
       color: var(--text);
-      font-size: 0.88rem;
-      cursor: pointer;
+      line-height: 1.3;
     }
-    .help-panel {
-      margin-top: 0.65rem;
-      font-size: 0.85rem;
-      color: var(--muted);
+    .review-memo {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
     }
-    .help-panel ol { margin: 0.4rem 0 0; padding-left: 1.2rem; }
-    .help-panel li { margin-bottom: 0.35rem; }
-    footer {
+    .review-memo.hidden-memo {
+      color: var(--text-tertiary);
+      font-style: italic;
+    }
+    .btn-reveal {
+      margin-top: 0.85rem;
+      width: 100%;
+    }
+
+    .review-tools {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+    .review-tools label { display: flex; align-items: center; gap: 0.35rem; cursor: pointer; user-select: none; }
+
+    .empty-hint { color: var(--text-secondary); font-size: 0.86rem; margin: 0; line-height: 1.5; }
+
+    footer.app-footer {
       text-align: center;
-      margin-top: 1rem;
-      font-size: 0.75rem;
-      color: var(--muted);
+      margin-top: 1.25rem;
+      font-size: 0.72rem;
+      color: var(--text-tertiary);
     }
+
+    [hidden] { display: none !important; }
   </style>
 </head>
 <body>
-  <header>
+  <header class="app-header">
+    <div class="brand-mark" aria-hidden="true">◇</div>
     <h1>Castelli mentali</h1>
-    <p class="subtitle">Costruisci un percorso mentale: ogni punto tiene ciò che vuoi ricordare, in ordine.</p>
+    <p class="subtitle">Trasforma pochi minuti sul telefono in un allenamento di memoria attiva — invece dello scroll passivo.</p>
   </header>
 
   <main>
-    <section class="card" aria-label="Palazzo attivo">
+    <nav class="nav-tabs" role="tablist" aria-label="Sezioni app">
+      <button type="button" class="nav-tab active" id="tabHome" role="tab" aria-selected="true">Percorso</button>
+      <button type="button" class="nav-tab" id="tabEdit" role="tab" aria-selected="false">Costruisci</button>
+      <button type="button" class="nav-tab" id="tabReview" role="tab" aria-selected="false">Ripasso</button>
+      <button type="button" class="nav-tab" id="tabScience" role="tab" aria-selected="false">Scienza</button>
+    </nav>
+
+    <section id="panelHome" class="card" role="tabpanel">
+      <h2>Perché questa app</h2>
+      <p class="lede">Se il telefono ti ruba tempo senza lasciarti nulla di concreto, usa questi <strong>5 minuti</strong> con uno scopo: costruire un percorso mentale e ripassarlo. È un’attività <strong>strutturata</strong>, misurabile e collegata a tecniche che la ricerca sulla memoria studia da decenni.</p>
+      <h2 style="margin-top:1rem">Come usarla (flusso)</h2>
+      <ol class="steps">
+        <li><strong>Scegli o aggiungi un percorso demo</strong> qui sotto — già pieno di esempi su tempo, benessere e studio.</li>
+        <li>Vai su <strong>Costruisci</strong> se vuoi cambiare punti o testi (ogni punto = un luogo + cosa ricordi lì).</li>
+        <li>Apri <strong>Ripasso</strong>: leggi il luogo, <strong>pausa</strong>, prova a ricordare, poi mostra la risposta.</li>
+        <li>Ripeti 2–3 volte a settimana: meglio sessioni brevi che maratone.</li>
+      </ol>
+
+      <h2 style="margin-top:1.1rem">Percorsi proposti (demo)</h2>
+      <p class="lede" style="margin-bottom:0.65rem">Aggiungono un nuovo palazzo con loci già compilati. Puoi modificarli dopo in Costruisci.</p>
+      <div class="preset-grid">
+        <button type="button" class="preset-btn" id="presetTime" data-preset="time">
+          <span class="ptitle">Tempo, focus e benessere</span>
+          <span class="pdesc">Routine da 5 min: intenzione, pausa consapevole, una cosa significativa — meno senso di “tempo perso”.</span>
+        </button>
+        <button type="button" class="preset-btn" id="presetStudy" data-preset="study">
+          <span class="ptitle">Studio collaudato</span>
+          <span class="pdesc">Promemoria su ripetizione attiva, recupero, sonno e sessioni brevi — pratiche con evidenza in didattica e neuroscienze.</span>
+        </button>
+        <button type="button" class="preset-btn" id="presetChampions" data-preset="champions">
+          <span class="ptitle">Come i campioni di memoria</span>
+          <span class="pdesc">Percorso che riassume abitudini degli atleti della memoria (percorsi fissi, immagini estreme, ripetizione).</span>
+        </button>
+      </div>
+    </section>
+
+    <section id="panelEdit" class="card" hidden role="tabpanel">
+      <h2>Palazzo attivo</h2>
       <div class="toolbar">
         <label for="palaceSelect">Palazzo</label>
         <select id="palaceSelect" class="input" aria-label="Seleziona palazzo"></select>
@@ -229,18 +441,11 @@
         <button type="button" class="btn small" id="btnNewPalace">Nuovo palazzo</button>
         <button type="button" class="btn small secondary" id="btnDeletePalace">Elimina</button>
       </div>
-      <label class="field-label" for="palaceName">Rinomina</label>
-      <input type="text" id="palaceName" class="input" placeholder="Es. Casa, Ufficio, Palestra" maxlength="80" />
-    </section>
+      <label class="field-label" for="palaceName">Nome</label>
+      <input type="text" id="palaceName" class="input" placeholder="Es. Casa, Biblioteca" maxlength="80" />
 
-    <div class="tabs" role="tablist">
-      <button type="button" class="tab active" id="tabEdit" role="tab" aria-selected="true">Costruisci</button>
-      <button type="button" class="tab" id="tabReview" role="tab" aria-selected="false">Ripasso</button>
-    </div>
-
-    <section id="panelEdit" class="card" role="tabpanel">
-      <h2>Punti del percorso (loci)</h2>
-      <p class="empty-hint" style="margin-bottom:0.65rem">In ordine: primo = primo ricordo, ecc. Sotto ogni luogo scrivi l’associazione vivida.</p>
+      <h2 style="margin-top:1.15rem">Punti (loci)</h2>
+      <p class="empty-hint" style="margin-bottom:0.65rem">Ordine fisso: il primo punto è il primo ricordo. Seconda riga = immagine vivida o promemoria.</p>
       <div class="btn-row" style="margin-bottom:0.75rem">
         <button type="button" class="btn small" id="btnAddLocus">+ Punto</button>
         <button type="button" class="btn small secondary" id="btnTemplate10">+10 numerati</button>
@@ -249,12 +454,19 @@
     </section>
 
     <section id="panelReview" class="card" hidden role="tabpanel">
-      <h2>Ripasso</h2>
-      <p class="empty-hint" style="margin-bottom:0.65rem">Copri lo schermo dopo aver letto il luogo e prova a ricordare l’associazione prima di andare avanti.</p>
+      <h2>Ripasso attivo</h2>
+      <p class="empty-hint" style="margin-bottom:0.75rem">Leggi il <strong>luogo</strong>, metti giù il telefono o copri la risposta, richiama a mente l’associazione, poi svela.</p>
+      <div class="review-tools">
+        <label>
+          <input type="checkbox" id="chkHideMemo" checked />
+          Nascondi risposta fino a “Mostra”
+        </label>
+      </div>
       <div class="review-box">
         <div class="review-progress" id="reviewProgress"></div>
         <div class="review-label" id="reviewLabel"></div>
-        <div class="review-memo" id="reviewMemo"></div>
+        <div class="review-memo hidden-memo" id="reviewMemo" aria-live="polite"></div>
+        <button type="button" class="btn secondary small btn-reveal" id="btnReveal" hidden>Mostra risposta</button>
       </div>
       <div class="btn-row">
         <button type="button" class="btn secondary small" id="btnPrev">Indietro</button>
@@ -263,9 +475,23 @@
       </div>
     </section>
 
-    <section class="card" aria-label="Backup">
+    <section id="panelScience" class="card" hidden role="tabpanel">
+      <h2>Cosa dicono gli studi</h2>
+      <p class="lede">Il <strong>metodo dei loci</strong> (castello / palazzo mentale) è una mnemonica <strong>spaziale</strong>: leghi ciò che vuoi ricordare a posizioni in un ambiente che conosci. La letteratura sulla memoria episodica e sulle strategie mnemoniche mostra che queste tecniche possono migliorare il richiamo ordinato rispetto alla ripetizione passiva, soprattutto quando le immagini sono distintive e tu ripercorri mentalmente lo stesso ordine.</p>
+      <p class="lede">Per <strong>studio e benessere</strong>, ricerche in ambito educativo e cognitivo sottolineano l’utilità della <strong>ripetizione attiva</strong> (richiamare senza guardare gli appunti), dello <strong>spaced repetition</strong> (ripassare a intervalli crescenti), del <strong>sonno</strong> per la consolidazione, e di <strong>sessioni brevi</strong> con pause — principi che i percorsi demo richiamano come promemoria, non come diagnosi medica.</p>
+
+      <h2 style="margin-top:1rem">I “grandi utilizzatori”</h2>
+      <p class="lede">Ai <strong>campionati mondiali di memoria</strong>, gli atleti usano sistematicamente <strong>percorsi mentali lunghi e fissi</strong>, immagini <strong>esagerate e multisensoriali</strong>, e <strong>allenamento quotidiano</strong> a brevi sessioni. Non serve ambire al record: la stessa struttura (percorso + immagine + ripetizione) si scala per liste della spesa, punti chiave di un esame o abitudini che vuoi ricordare.</p>
+
+      <button type="button" class="disclosure" id="sciToggleWhy" aria-expanded="false">Perché il telefono può sembrare “tempo perso”</button>
+      <div class="disclosure-panel" id="sciPanelWhy" hidden>
+        <p>Lo scroll infinito offre ricompense imprevedibili e poco costo cognitivo: il cervelo cerca stimoli nuovi. Un’app come questa introduce invece <strong>obiettivo chiaro</strong>, <strong>fine sessione</strong> (es. un giro completo del palazzo) e <strong>sforzo di recupero</strong> (ricordare prima di vedere la risposta), che la ricerca associa a apprendimento più duraturo rispetto alla sola rilettura.</p>
+      </div>
+    </section>
+
+    <section class="card" aria-label="Backup dati">
       <h2>Backup</h2>
-      <p class="empty-hint" style="margin-bottom:0.65rem">I dati restano sul telefono. Esporta un JSON se cambi dispositivo.</p>
+      <p class="empty-hint" style="margin-bottom:0.65rem">Dati solo sul dispositivo. Esporta prima di cambiare telefono.</p>
       <div class="btn-row">
         <button type="button" class="btn small secondary" id="exportBtn">Esporta JSON</button>
         <label class="btn small secondary" style="display:inline-block;cursor:pointer;margin:0">
@@ -274,21 +500,9 @@
         </label>
       </div>
     </section>
-
-    <section class="card">
-      <button type="button" class="help-btn" id="helpToggle" aria-expanded="false">Come funziona il metodo ▾</button>
-      <div class="help-panel" id="helpPanel" hidden>
-        <ol>
-          <li>Crea un <strong>palazzo</strong> = un luogo che conosci (casa, scuola).</li>
-          <li>Aggiungi <strong>punti in ordine</strong> lungo un percorso fisso (porta, corridoio, tavolo…).</li>
-          <li>Per ogni cosa da ricordare, metti un’<strong>immagine assurda</strong> sul punto giusto: più è strana, più resta.</li>
-          <li>Usa <strong>Ripasso</strong> per allenarti: vedi il luogo, ricorda, poi controlla.</li>
-        </ol>
-      </div>
-    </section>
   </main>
 
-  <footer>Dati in locale · Castelli mentali</footer>
+  <footer class="app-footer">Contenuti in locale · Nessun account richiesto</footer>
   <script src="app.js" defer></script>
 </body>
 </html>
